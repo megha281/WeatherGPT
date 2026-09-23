@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-night-900 text-mist-100 font-sans antialiased;
+  margin: 0;
+}
+
+/* Focus styles stay visible for keyboard users everywhere. */
+:focus-visible {
+  outline: 2px solid #5ad7fb;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-white/10 bg-night-800/80 shadow-panel;
+  }
+  .panel-tight {
+    @apply rounded-xl border border-white/10 bg-night-800/60;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-signal-500 text-night-900 hover:bg-signal-400;
+  }
+  .btn-ghost {
+    @apply btn border border-white/15 text-mist-100 hover:border-signal-500/60 hover:text-white;
+  }
+  .btn-quiet {
+    @apply btn text-mist-300 hover:text-white;
+  }
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-night-900/70 px-4 py-3 text-mist-100 placeholder:text-mist-400
+      focus:border-signal-500 focus:outline-none;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-mist-200;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-night-700/70 px-3 py-1 text-xs text-mist-200;
+  }
+  .metric-value {
+    @apply font-display text-2xl font-bold text-white;
+  }
+  .section-title {
+    @apply font-display text-lg font-bold text-white;
+  }
+}
+
+/* Leaflet sits on a dark page, so tone the tiles and popups to match. */
+.leaflet-container {
+  background: #0a1d2b;
+  font-family: inherit;
+}
+.leaflet-tile {
+  filter: brightness(0.82) saturate(0.85) contrast(1.05);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #0f2836;
+  color: #eaf4f8;
+  border-radius: 12px;
+}
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+/* Recharts tooltips */
+.recharts-default-tooltip {
+  background: #0f2836 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+}
