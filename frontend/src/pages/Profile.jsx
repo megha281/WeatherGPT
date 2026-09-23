@@ -22,7 +22,7 @@ export default function Profile() {
     e.preventDefault();
     setMessage(null);
     setError(null);
-    if (!name.trim()) return setError('Your name cannot be empty.');
+    if (!name.trim()) return setError(t('auth.nameEmpty'));
     setBusy(true);
     try {
       const data = await userService.updateProfile({
@@ -63,36 +63,36 @@ export default function Profile() {
       <h1 className="font-display text-3xl font-extrabold text-white">{t('nav.profile')}</h1>
 
       <section className="panel mt-6 p-5">
-        <h2 className="section-title">Account</h2>
+        <h2 className="section-title">{t('profile.account')}</h2>
         <dl className="mt-3 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-white/10 bg-night-900/40 px-3 py-2">
             <dt className="text-xs text-mist-400">{t('auth.email')}</dt>
             <dd className="text-sm text-mist-100">{user?.email}</dd>
           </div>
           <div className="rounded-xl border border-white/10 bg-night-900/40 px-3 py-2">
-            <dt className="text-xs text-mist-400">Email status</dt>
+            <dt className="text-xs text-mist-400">{t('profile.emailStatus')}</dt>
             <dd className="flex items-center gap-1.5 text-sm text-mist-100">
               {user?.isEmailVerified ? (
                 <>
-                  <BadgeCheck className="h-4 w-4 text-risk-low" aria-hidden="true" /> Verified
+                  <BadgeCheck className="h-4 w-4 text-risk-low" aria-hidden="true" /> {t('profile.verified')}
                 </>
               ) : (
                 <>
-                  <MailWarning className="h-4 w-4 text-risk-moderate" aria-hidden="true" /> Not verified
+                  <MailWarning className="h-4 w-4 text-risk-moderate" aria-hidden="true" /> {t('profile.notVerified')}
                 </>
               )}
             </dd>
           </div>
           <div className="rounded-xl border border-white/10 bg-night-900/40 px-3 py-2">
-            <dt className="text-xs text-mist-400">Member since</dt>
+            <dt className="text-xs text-mist-400">{t('profile.memberSince')}</dt>
             <dd className="text-sm text-mist-100">
               {user?.createdAt ? new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '—'}
             </dd>
           </div>
           <div className="rounded-xl border border-white/10 bg-night-900/40 px-3 py-2">
-            <dt className="text-xs text-mist-400">Last sign-in</dt>
+            <dt className="text-xs text-mist-400">{t('profile.lastSignIn')}</dt>
             <dd className="text-sm text-mist-100">
-              {user?.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString('en-IN') : 'This session'}
+              {user?.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : t('profile.thisSession')}
             </dd>
           </div>
         </dl>
@@ -100,7 +100,7 @@ export default function Profile() {
         {!user?.isEmailVerified ? (
           <div className="mt-4">
             <button type="button" onClick={resendVerification} className="btn-ghost">
-              Resend verification email
+              {t('profile.resend')}
             </button>
             {resend ? <p className="mt-2 break-all text-sm text-mist-300">{resend}</p> : null}
           </div>
@@ -108,7 +108,7 @@ export default function Profile() {
       </section>
 
       <form onSubmit={save} className="panel mt-6 space-y-4 p-5" noValidate>
-        <h2 className="section-title">Details</h2>
+        <h2 className="section-title">{t('profile.details')}</h2>
 
         <div>
           <label className="label" htmlFor="name">{t('auth.fullName')}</label>

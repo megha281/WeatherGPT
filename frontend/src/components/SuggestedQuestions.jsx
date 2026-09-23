@@ -1,9 +1,10 @@
 import { Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import SUGGESTED_QUESTIONS from '../utils/suggestions';
+import { getSuggestedQuestions } from '../utils/suggestions';
 
-export default function SuggestedQuestions({ onPick, questions = SUGGESTED_QUESTIONS, limit = 8 }) {
+export default function SuggestedQuestions({ onPick, questions, limit = 8 }) {
   const { t } = useLanguage();
+  const localizedQuestions = questions || getSuggestedQuestions(t);
   return (
     <div>
       <p className="mb-2 flex items-center gap-1.5 text-sm text-mist-300">
@@ -11,7 +12,7 @@ export default function SuggestedQuestions({ onPick, questions = SUGGESTED_QUEST
         {t('chat.suggestions')}
       </p>
       <div className="flex flex-wrap gap-2">
-        {questions.slice(0, limit).map((q) => (
+        {localizedQuestions.slice(0, limit).map((q) => (
           <button
             key={q}
             type="button"

@@ -9,8 +9,8 @@ import { Spinner } from '../components/Loading';
 
 /** Mirrors the backend rule: 8+ characters with a letter and a number. */
 function passwordProblem(password) {
-  if (password.length < 8) return 'Use at least 8 characters.';
-  if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) return 'Include at least one letter and one number.';
+  if (password.length < 8) return 'auth.passwordLength';
+  if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) return 'auth.passwordRequirements';
   return null;
 }
 
@@ -39,11 +39,11 @@ export default function Register() {
     e.preventDefault();
     setError(null);
 
-    if (!form.name.trim()) return setError('Enter your full name.');
-    if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) return setError('Enter a valid email address.');
+    if (!form.name.trim()) return setError(t('auth.nameRequired'));
+    if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) return setError(t('auth.validEmail'));
     const problem = passwordProblem(form.password);
-    if (problem) return setError(problem);
-    if (form.password !== form.confirmPassword) return setError('The two passwords do not match.');
+    if (problem) return setError(t(problem));
+    if (form.password !== form.confirmPassword) return setError(t('auth.passwordMismatch'));
 
     setBusy(true);
     try {
@@ -81,7 +81,7 @@ export default function Register() {
   return (
     <div className="mx-auto max-w-lg px-4 py-14">
       <h1 className="font-display text-3xl font-extrabold text-white">{t('auth.signUp')}</h1>
-      <p className="mt-2 text-mist-300">Save your places, keep your conversations and pick your language.</p>
+      <p className="mt-2 text-mist-300">{t('auth.registerDescription')}</p>
 
       <form onSubmit={submit} className="panel mt-6 space-y-4 p-6" noValidate>
         <div>
@@ -109,12 +109,12 @@ export default function Register() {
               type="button"
               onClick={() => setShow((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-mist-400 hover:text-white"
-              aria-label={show ? 'Hide password' : 'Show password'}
+              aria-label={show ? t('auth.hidePassword') : t('auth.showPassword')}
             >
               {show ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
             </button>
           </div>
-          <p className="mt-1 text-xs text-mist-400">At least 8 characters, including a letter and a number.</p>
+          <p className="mt-1 text-xs text-mist-400">{t('auth.passwordHint')}</p>
         </div>
 
         <div>

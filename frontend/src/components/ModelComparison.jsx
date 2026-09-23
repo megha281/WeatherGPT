@@ -3,12 +3,14 @@ import { Layers } from 'lucide-react';
 import weatherService from '../services/weatherService';
 import { formatDay, formatNumber, formatPercent, formatTemp } from '../utils/format';
 import { LoadingBlock } from './Loading';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Side-by-side view of the forecast models Open-Meteo publishes for this point.
  * Models with no data are skipped rather than filled in.
  */
 export default function ModelComparison({ location }) {
+  const { t, locale } = useLanguage();
   const [state, setState] = useState({ loading: true, data: null, note: '', error: null });
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function ModelComparison({ location }) {
     };
   }, [location]);
 
-  if (state.loading) return <LoadingBlock label="Comparing forecast models…" />;
+  if (state.loading) return <LoadingBlock label={t('models.loading')} />;
   if (state.error || !state.data?.models?.length) return null;
 
   const dates = state.data.models[0].days.map((d) => d.date);
@@ -33,7 +35,7 @@ export default function ModelComparison({ location }) {
     <section className="panel p-5">
       <h2 className="section-title flex items-center gap-2">
         <Layers className="h-5 w-5 text-signal-400" aria-hidden="true" />
-        Multi-model comparison
+        {t('models.title')}
       </h2>
       <p className="mt-1 text-sm text-mist-400">{state.note}</p>
 
@@ -41,9 +43,9 @@ export default function ModelComparison({ location }) {
         <table className="w-full min-w-[34rem] text-left text-sm">
           <thead>
             <tr className="text-xs uppercase tracking-wide text-mist-400">
-              <th className="py-2 pr-4">Model</th>
+              <th className="py-2 pr-4">{t('models.model')}</th>
               {dates.map((date) => (
-                <th key={date} className="py-2 pr-4">{formatDay(date)}</th>
+                <th key={date} className="py-2 pr-4">{formatDay(date, { locale: locale.locale, todayLabel: t('common.today'), tomorrowLabel: t('common.tomorrow') })}</th>
               ))}
             </tr>
           </thead>

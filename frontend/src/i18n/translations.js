@@ -1,25 +1,20 @@
 /**
- * UI strings. English is the source of truth: any key missing from another
- * language falls back to English, so a partial translation never breaks a page.
+ * Core UI strings. Locale metadata, weather terminology, and alert terminology
+ * live in separate modules so adding a language does not require component edits.
  *
  * Numbers and units are never translated. They are rendered from the API
  * values as digits (28°C, 80%, 15 km/h) in every language.
  */
 
-export const LANGUAGES = [
-  { code: 'en', label: 'English', native: 'English' },
-  { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
-  { code: 'kn', label: 'Kannada', native: 'ಕನ್ನಡ' },
-  { code: 'ta', label: 'Tamil', native: 'தமிழ்' },
-  { code: 'te', label: 'Telugu', native: 'తెలుగు' },
-];
+import { LANGUAGE_META } from './localeData';
+
+export const LANGUAGES = LANGUAGE_META;
 
 const en = {
   'nav.home': 'Home',
   'nav.weather': 'Weather',
   'nav.chat': 'WeatherGPT',
   'nav.alerts': 'Alerts',
-  'nav.climate': 'Climate',
   'nav.map': 'Map',
   'nav.about': 'About',
   'nav.signin': 'Sign in',
@@ -46,13 +41,20 @@ const en = {
   'common.source': 'Source',
   'common.sources': 'Sources',
   'common.loading': 'Loading…',
+  'common.language': 'Language',
+  'common.menu': 'Menu',
+  'common.showPassword': 'Show password',
+  'common.hidePassword': 'Hide password',
+  'common.observed': 'Observed',
+  'common.checked': 'Checked',
+  'common.explore': 'Explore',
+  'common.aboutProject': 'About this project',
 
   'loading.weather': 'Loading weather…',
   'loading.location': 'Searching location…',
   'loading.thinking': 'WeatherGPT is thinking…',
   'loading.analyzing': 'Analysing weather…',
   'loading.alerts': 'Loading alerts…',
-  'loading.climate': 'Loading climate data…',
 
   'empty.savedLocations': 'No saved locations yet.',
   'empty.conversations': 'No previous conversations.',
@@ -77,6 +79,8 @@ const en = {
   'weather.models': 'Model comparison',
   'weather.high': 'High',
   'weather.low': 'Low',
+  'weather.observed': 'Observed',
+  'weather.scrollHours': 'Scroll for the full 24 hours. Rain chance is the percentage under each hour.',
 
   'risk.title': 'WeatherGPT risk assessment',
   'risk.level': 'Risk level',
@@ -120,6 +124,129 @@ const en = {
   'dashboard.evening': 'Good evening',
   'dashboard.recentQuestions': 'Recent questions',
   'dashboard.savedLocations': 'Saved locations',
+  'locations.label': 'Label this place',
+  'locations.labelPlaceholder': 'Home, College, Work… (default: {name})',
+  'locations.saveHint': 'Save the places you check most — home, college, work.',
+  'locations.saved': 'Saved.',
+  'locations.noMatch': 'No place matches “{query}”. Try a nearby city or district name.',
+  'alerts.noOfficial': 'No official warning is in force here',
+  'alerts.noOfficialDescription': 'Nothing has been published for this point through the feeds this build can read.',
+  'alerts.noGenerated': 'Nothing in the next seven days crosses a risk threshold here.',
+  'errors.loadTitle': 'That did not load',
+  'errors.tryAgain': 'Try again',
+  'footer.description': 'Conversational AI for weather forecasting, alerts and actionable insights.',
+  'footer.explore': 'Explore',
+  'footer.sources': 'Data and sources',
+  'footer.weatherData': 'Weather data',
+  'footer.maps': 'Maps',
+  'footer.knowledge': 'Knowledge',
+  'footer.ai': 'AI',
+  'footer.aboutText': 'Understand the weather and make more informed decisions.',
+  'footer.disclaimer': 'WeatherGPT risk assessments are automated and are not official government warnings. Always follow IMD, NDMA and local authority instructions during severe weather.',
+  'auth.welcome': 'Welcome back. Your saved places and conversations are waiting.',
+  'auth.enterCredentials': 'Enter your email and password.',
+  'auth.signingIn': 'Signing in…',
+  'auth.hidePassword': 'Hide password',
+  'auth.showPassword': 'Show password',
+  'settings.description': 'These preferences apply across the dashboard, alerts and chat.',
+  'settings.unitsDigits': 'Temperatures, percentages and wind speeds always stay as digits, in every language.',
+  'settings.selectedLocation': 'Selected: {name}',
+  'settings.noLocation': 'No default location set.',
+  'settings.temperature': 'Temperature unit',
+  'settings.celsius': 'Celsius (°C)',
+  'settings.fahrenheit': 'Fahrenheit (°F)',
+  'settings.wind': 'Wind unit',
+  'settings.alertSeverity': 'Show alerts from severity',
+  'settings.andAbove': '{level} and above',
+  'settings.notifications': 'Notification preferences',
+  'settings.emailAlerts': 'Email me about alerts for my default location',
+  'settings.severeOnly': 'Only for severe weather',
+  'settings.smtp': 'Email delivery needs SMTP credentials in the backend. Without them the preference is stored but no mail is sent.',
+  'map.description': 'Search for a place, or tap anywhere on the map to read its weather.',
+  'map.loading': 'Loading weather…',
+  'map.selected': 'Selected location',
+  'map.ask': 'Ask about this place',
+  'map.attribution': 'Map tiles © OpenStreetMap contributors. Weather: Open-Meteo.',
+  'common.refresh': 'Refresh',
+  'common.seeAll': 'See all',
+  'common.manage': 'Manage',
+  'common.all': 'All',
+  'dashboard.searchStart': 'Search for a place to start.',
+  'chat.welcome': 'Ask about the weather where you are.',
+  'chat.grounded': 'Every number in the answer comes from Open-Meteo for the place and time you asked about. Risk levels come from our rule engine and are always labelled as a WeatherGPT Risk Assessment, never as an official warning.',
+  'chat.sourcesFooter': 'Weather data: Open-Meteo · Knowledge: WeatherGPT Knowledge Base · AI: Google Gemini. Gemini explains the data; it does not produce the measurements.',
+  'weather.sourceData': 'Weather data',
+  'weather.riskAnalysis': 'Risk analysis',
+  'weather.riskEngine': 'WeatherGPT Risk Engine (deterministic rules)',
+  'alerts.checked': 'Checked',
+  'notFound.title': 'Nothing here',
+  'notFound.description': 'That page does not exist. The forecast, the chat and the alerts all still do.',
+  'notFound.home': 'Back home',
+  'notFound.weather': 'Check the weather',
+  'questions.rainTomorrow': 'Will it rain tomorrow?',
+  'questions.rainBellary': 'Will it rain tomorrow evening in Bellary?',
+  'questions.umbrella': 'Should I carry an umbrella?',
+  'questions.travel': 'Is it safe to travel today?',
+  'questions.hot': 'How hot will it be this afternoon?',
+  'questions.risk': 'Is there any severe weather risk?',
+  'questions.explain': "Explain today's weather simply.",
+  'questions.weekend': 'What will the weather be like this weekend?',
+  'errors.timeout': 'That took too long. Check your connection and try again.',
+  'errors.server': 'Cannot reach the WeatherGPT server. Make sure the backend is running.',
+  'errors.generic': 'Something went wrong. Try again.',
+  'auth.validEmail': 'Enter a valid email address.',
+  'auth.passwordLength': 'Use at least 8 characters.',
+  'auth.passwordRequirements': 'Include at least one letter and one number.',
+  'auth.passwordMismatch': 'The two passwords do not match.',
+  'auth.nameRequired': 'Enter your full name.',
+  'auth.passwordHint': 'At least 8 characters, including a letter and a number.',
+  'forgot.instructions': 'Enter the email on your account. If it exists, a reset link valid for 30 minutes will be sent.',
+  'forgot.sending': 'Sending…',
+  'forgot.send': 'Send reset link',
+  'forgot.back': 'Back to {signIn}',
+  'history.loading': 'Loading conversations…',
+  'history.description': 'Conversations are saved to your account only while you are signed in.',
+  'history.deleteAll': 'Delete all',
+  'history.askSaved': 'Ask WeatherGPT a question and it will be saved here.',
+  'history.opening': 'Opening conversation…',
+  'history.pick': 'Pick a conversation on the left to read it.',
+  'saved.description': 'Save the places you check most. Selecting one makes it the active location across every page.',
+  'verify.checking': 'Verifying your email…',
+  'verify.done': 'Email verified',
+  'verify.goDashboard': 'Go to dashboard',
+  'verify.failed': 'That link did not work',
+  'verify.expired': 'Verification links expire after 24 hours. Request a new one and check the backend terminal if email is not configured.',
+  'verify.resend': 'Resend verification email',
+  'verify.signInFirst': 'Sign in first to request a new link.',
+  'auth.registerDescription': 'Save your places, keep your conversations and pick your language.',
+  'auth.newPasswordDescription': 'Choose a new password for your account.',
+  'auth.passwordUpdated': 'Password updated. Taking you to the sign-in page…',
+  'auth.updating': 'Updating…',
+  'auth.nameEmpty': 'Your name cannot be empty.',
+  'auth.registeredDescription': 'Save your places, keep your conversations and pick your language.',
+  'profile.account': 'Account',
+  'profile.emailStatus': 'Email status',
+  'profile.verified': 'Verified',
+  'profile.notVerified': 'Not verified',
+  'profile.memberSince': 'Member since',
+  'profile.lastSignIn': 'Last sign-in',
+  'profile.thisSession': 'This session',
+  'profile.resend': 'Resend verification email',
+  'profile.details': 'Details',
+  'charts.temperature': 'Temperature',
+  'charts.rainChance': 'Rain chance',
+  'charts.rainfall': 'Rainfall',
+  'charts.wind': 'Wind',
+  'charts.feelsLike': 'Feels like',
+  'charts.gusts': 'Gusts',
+  'charts.note': 'Values come from the Open-Meteo hourly forecast for the selected location.',
+  'voice.unsupported': 'Voice input is not supported in this browser. Try Chrome or Edge.',
+  'voice.permission': 'Microphone permission was denied. Allow it in the browser address bar to use voice.',
+  'voice.failed': 'Could not catch that. Try again, or type the question.',
+  'locations.saved': 'Saved.',
+  'models.loading': 'Comparing forecast models…',
+  'models.title': 'Multi-model comparison',
+  'models.model': 'Model',
 };
 
 const hi = {
@@ -127,7 +254,6 @@ const hi = {
   'nav.weather': 'मौसम',
   'nav.chat': 'वेदरGPT',
   'nav.alerts': 'चेतावनी',
-  'nav.climate': 'जलवायु',
   'nav.map': 'नक्शा',
   'nav.about': 'परिचय',
   'nav.signin': 'साइन इन',
@@ -207,7 +333,6 @@ const kn = {
   'nav.weather': 'ಹವಾಮಾನ',
   'nav.chat': 'ವೆದರ್‌GPT',
   'nav.alerts': 'ಎಚ್ಚರಿಕೆಗಳು',
-  'nav.climate': 'ಹವಾಗುಣ',
   'nav.map': 'ನಕ್ಷೆ',
   'nav.about': 'ಕುರಿತು',
   'nav.signin': 'ಸೈನ್ ಇನ್',
@@ -287,7 +412,6 @@ const ta = {
   'nav.weather': 'வானிலை',
   'nav.chat': 'வெதர்GPT',
   'nav.alerts': 'எச்சரிக்கைகள்',
-  'nav.climate': 'காலநிலை',
   'nav.map': 'வரைபடம்',
   'nav.about': 'பற்றி',
   'nav.signin': 'உள்நுழை',
@@ -367,7 +491,6 @@ const te = {
   'nav.weather': 'వాతావరణం',
   'nav.chat': 'వెదర్‌GPT',
   'nav.alerts': 'హెచ్చరికలు',
-  'nav.climate': 'శీతోష్ణస్థితి',
   'nav.map': 'మ్యాప్',
   'nav.about': 'గురించి',
   'nav.signin': 'సైన్ ఇన్',
@@ -442,5 +565,38 @@ const te = {
   'dashboard.savedLocations': 'సేవ్ చేసిన ప్రదేశాలు',
 };
 
-export const translations = { en, hi, kn, ta, te };
+const makeLocale = (locale) => ({ ...en, ...locale });
+
+// These starter bundles cover the shared shell while each locale is expanded
+// through the same catalog as page-specific copy is migrated.
+const ml = makeLocale({ 'nav.home': 'ഹോം', 'nav.weather': 'കാലാവസ്ഥ', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'മുന്നറിയിപ്പുകൾ', 'nav.map': 'മാപ്പ്', 'nav.about': 'കുറിച്ച്', 'nav.signin': 'സൈൻ ഇൻ', 'nav.signup': 'അക്കൗണ്ട് സൃഷ്ടിക്കുക', 'nav.dashboard': 'ഡാഷ്ബോർഡ്', 'nav.profile': 'പ്രൊഫൈൽ', 'nav.settings': 'ക്രമീകരണങ്ങൾ', 'nav.logout': 'പുറത്തുകടക്കുക', 'common.search': 'തിരയുക', 'common.searchPlaceholder': 'നഗരം, പട്ടണം അല്ലെങ്കിൽ ജില്ല തിരയുക', 'common.useMyLocation': 'എന്റെ സ്ഥലം ഉപയോഗിക്കുക', 'common.save': 'സംരക്ഷിക്കുക', 'common.delete': 'ഇല്ലാതാക്കുക', 'common.cancel': 'റദ്ദാക്കുക', 'common.retry': 'വീണ്ടും ശ്രമിക്കുക', 'common.today': 'ഇന്ന്', 'common.tomorrow': 'നാളെ', 'common.now': 'ഇപ്പോൾ', 'common.sources': 'ഉറവിടങ്ങൾ', 'loading.weather': 'കാലാവസ്ഥ ലോഡ് ചെയ്യുന്നു…', 'loading.thinking': 'WeatherGPT ചിന്തിക്കുന്നു…', 'loading.alerts': 'മുന്നറിയിപ്പുകൾ ലോഡ് ചെയ്യുന്നു…', 'empty.alerts': 'സജീവ മുന്നറിയിപ്പുകളില്ല.', 'empty.weather': 'കാലാവസ്ഥാ ഡാറ്റ ലഭ്യമല്ല.', 'weather.current': 'ഇപ്പോഴത്തെ കാലാവസ്ഥ', 'weather.humidity': 'ഈർപ്പം', 'weather.wind': 'കാറ്റ്', 'weather.rainChance': 'മഴയ്ക്കുള്ള സാധ്യത', 'weather.hourly': 'അടുത്ത 24 മണിക്കൂർ', 'weather.daily': '7 ദിവസത്തെ പ്രവചനം', 'weather.charts': 'പ്രവചന ചാർട്ടുകൾ', 'risk.title': 'WeatherGPT അപകട വിലയിരുത്തൽ', 'risk.level': 'അപകട നില', 'risk.advisory': 'എന്ത് ചെയ്യണം', 'risk.LOW': 'കുറവ്', 'risk.MODERATE': 'മിതമായ', 'risk.HIGH': 'കൂടുതൽ', 'risk.SEVERE': 'ഗുരുതരം', 'alerts.official': 'ഔദ്യോഗിക കാലാവസ്ഥാ മുന്നറിയിപ്പ്', 'alerts.generated': 'WeatherGPT അപകട വിലയിരുത്തൽ', 'chat.title': 'WeatherGPT-യോട് ചോദിക്കുക', 'chat.send': 'അയയ്ക്കുക', 'chat.clear': 'ചാറ്റ് മായ്ക്കുക', 'chat.suggestions': 'ഇങ്ങനെ ചോദിക്കാം', 'chat.listening': 'ശ്രദ്ധിക്കുന്നു…', 'auth.signIn': 'സൈൻ ഇൻ', 'auth.signUp': 'അക്കൗണ്ട് സൃഷ്ടിക്കുക', 'auth.fullName': 'പൂർണ്ണ പേര്', 'auth.email': 'ഇമെയിൽ', 'auth.password': 'പാസ്‌വേഡ്', 'auth.confirmPassword': 'പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക', 'auth.language': 'ഇഷ്ടപ്പെട്ട ഭാഷ', 'auth.forgot': 'പാസ്‌വേഡ് മറന്നോ?' });
+const mr = makeLocale({ 'nav.home': 'मुख्यपृष्ठ', 'nav.weather': 'हवामान', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'इशारे', 'nav.map': 'नकाशा', 'nav.about': 'माहिती', 'nav.signin': 'साइन इन', 'nav.signup': 'खाते तयार करा', 'nav.dashboard': 'डॅशबोर्ड', 'nav.profile': 'प्रोफाइल', 'nav.settings': 'सेटिंग्ज', 'nav.logout': 'बाहेर पडा', 'common.search': 'शोधा', 'common.searchPlaceholder': 'शहर, गाव किंवा जिल्हा शोधा', 'common.useMyLocation': 'माझे स्थान वापरा', 'common.save': 'जतन करा', 'common.delete': 'हटवा', 'common.cancel': 'रद्द करा', 'common.retry': 'पुन्हा प्रयत्न करा', 'common.today': 'आज', 'common.tomorrow': 'उद्या', 'common.now': 'आत्ता', 'common.sources': 'स्रोत', 'loading.weather': 'हवामान लोड होत आहे…', 'loading.thinking': 'WeatherGPT विचार करत आहे…', 'loading.alerts': 'इशारे लोड होत आहेत…', 'empty.alerts': 'सक्रिय इशारे नाहीत.', 'empty.weather': 'हवामान माहिती उपलब्ध नाही.', 'weather.current': 'सध्याचे हवामान', 'weather.humidity': 'आर्द्रता', 'weather.wind': 'वारा', 'weather.rainChance': 'पावसाची शक्यता', 'weather.hourly': 'पुढील 24 तास', 'weather.daily': '7 दिवसांचा अंदाज', 'weather.charts': 'अंदाजाचे चार्ट', 'risk.title': 'WeatherGPT जोखीम मूल्यांकन', 'risk.level': 'जोखीम पातळी', 'risk.advisory': 'काय करावे', 'risk.LOW': 'कमी', 'risk.MODERATE': 'मध्यम', 'risk.HIGH': 'जास्त', 'risk.SEVERE': 'तीव्र', 'alerts.official': 'अधिकृत हवामान इशारा', 'alerts.generated': 'WeatherGPT जोखीम मूल्यांकन', 'chat.title': 'WeatherGPT ला विचारा', 'chat.send': 'पाठवा', 'chat.clear': 'चॅट साफ करा', 'chat.suggestions': 'असे विचारून पहा', 'chat.listening': 'ऐकत आहे…', 'auth.signIn': 'साइन इन', 'auth.signUp': 'खाते तयार करा', 'auth.fullName': 'पूर्ण नाव', 'auth.email': 'ईमेल', 'auth.password': 'पासवर्ड', 'auth.confirmPassword': 'पासवर्डची पुष्टी करा', 'auth.language': 'पसंतीची भाषा', 'auth.forgot': 'पासवर्ड विसरलात?' });
+const bn = makeLocale({ 'nav.home': 'হোম', 'nav.weather': 'আবহাওয়া', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'সতর্কতা', 'nav.map': 'মানচিত্র', 'nav.about': 'পরিচিতি', 'nav.signin': 'সাইন ইন', 'nav.signup': 'অ্যাকাউন্ট তৈরি করুন', 'nav.dashboard': 'ড্যাশবোর্ড', 'nav.profile': 'প্রোফাইল', 'nav.settings': 'সেটিংস', 'nav.logout': 'লগ আউট', 'common.search': 'খুঁজুন', 'common.searchPlaceholder': 'শহর, শহরতলি বা জেলা খুঁজুন', 'common.useMyLocation': 'আমার অবস্থান ব্যবহার করুন', 'common.save': 'সংরক্ষণ করুন', 'common.delete': 'মুছুন', 'common.cancel': 'বাতিল', 'common.retry': 'আবার চেষ্টা করুন', 'common.today': 'আজ', 'common.tomorrow': 'আগামীকাল', 'common.now': 'এখন', 'common.sources': 'উৎস', 'loading.weather': 'আবহাওয়া লোড হচ্ছে…', 'loading.thinking': 'WeatherGPT ভাবছে…', 'loading.alerts': 'সতর্কতা লোড হচ্ছে…', 'empty.alerts': 'কোনও সক্রিয় সতর্কতা নেই।', 'empty.weather': 'আবহাওয়ার তথ্য পাওয়া যায়নি।', 'weather.current': 'বর্তমান আবহাওয়া', 'weather.humidity': 'আর্দ্রতা', 'weather.wind': 'বাতাস', 'weather.rainChance': 'বৃষ্টির সম্ভাবনা', 'weather.hourly': 'পরবর্তী 24 ঘণ্টা', 'weather.daily': '7 দিনের পূর্বাভাস', 'weather.charts': 'পূর্বাভাসের চার্ট', 'risk.title': 'WeatherGPT ঝুঁকি মূল্যায়ন', 'risk.level': 'ঝুঁকির স্তর', 'risk.advisory': 'কী করবেন', 'risk.LOW': 'কম', 'risk.MODERATE': 'মাঝারি', 'risk.HIGH': 'বেশি', 'risk.SEVERE': 'তীব্র', 'alerts.official': 'সরকারি আবহাওয়া সতর্কতা', 'alerts.generated': 'WeatherGPT ঝুঁকি মূল্যায়ন', 'chat.title': 'WeatherGPT-কে জিজ্ঞাসা করুন', 'chat.send': 'পাঠান', 'chat.clear': 'চ্যাট মুছুন', 'chat.suggestions': 'এভাবে জিজ্ঞাসা করে দেখুন', 'chat.listening': 'শুনছে…', 'auth.signIn': 'সাইন ইন', 'auth.signUp': 'অ্যাকাউন্ট তৈরি করুন', 'auth.fullName': 'পুরো নাম', 'auth.email': 'ইমেল', 'auth.password': 'পাসওয়ার্ড', 'auth.confirmPassword': 'পাসওয়ার্ড নিশ্চিত করুন', 'auth.language': 'পছন্দের ভাষা', 'auth.forgot': 'পাসওয়ার্ড ভুলে গেছেন?' });
+const gu = makeLocale({ 'nav.home': 'હોમ', 'nav.weather': 'હવામાન', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'ચેતવણીઓ', 'nav.map': 'નકશો', 'nav.about': 'વિશે', 'nav.signin': 'સાઇન ઇન', 'nav.signup': 'ખાતું બનાવો', 'nav.dashboard': 'ડેશબોર્ડ', 'nav.profile': 'પ્રોફાઇલ', 'nav.settings': 'સેટિંગ્સ', 'nav.logout': 'લૉગ આઉટ', 'common.search': 'શોધો', 'common.searchPlaceholder': 'શહેર, નગર અથવા જિલ્લો શોધો', 'common.useMyLocation': 'મારું સ્થાન વાપરો', 'common.save': 'સાચવો', 'common.delete': 'કાઢી નાખો', 'common.cancel': 'રદ કરો', 'common.retry': 'ફરી પ્રયાસ કરો', 'common.today': 'આજે', 'common.tomorrow': 'આવતીકાલે', 'common.now': 'હમણાં', 'common.sources': 'સ્રોતો', 'loading.weather': 'હવામાન લોડ થઈ રહ્યું છે…', 'loading.thinking': 'WeatherGPT વિચારી રહ્યું છે…', 'loading.alerts': 'ચેતવણીઓ લોડ થઈ રહી છે…', 'empty.alerts': 'સક્રિય ચેતવણીઓ નથી.', 'empty.weather': 'હવામાન માહિતી ઉપલબ્ધ નથી.', 'weather.current': 'વર્તમાન હવામાન', 'weather.humidity': 'ભેજ', 'weather.wind': 'પવન', 'weather.rainChance': 'વરસાદની શક્યતા', 'weather.hourly': 'આગામી 24 કલાક', 'weather.daily': '7 દિવસની આગાહી', 'weather.charts': 'આગાહીના ચાર્ટ', 'risk.title': 'WeatherGPT જોખમ મૂલ્યાંકન', 'risk.level': 'જોખમનું સ્તર', 'risk.advisory': 'શું કરવું', 'risk.LOW': 'ઓછું', 'risk.MODERATE': 'મધ્યમ', 'risk.HIGH': 'વધુ', 'risk.SEVERE': 'તીવ્ર', 'alerts.official': 'સત્તાવાર હવામાન ચેતવણી', 'alerts.generated': 'WeatherGPT જોખમ મૂલ્યાંકન', 'chat.title': 'WeatherGPTને પૂછો', 'chat.send': 'મોકલો', 'chat.clear': 'ચેટ સાફ કરો', 'chat.suggestions': 'આમ પૂછી જુઓ', 'chat.listening': 'સાંભળી રહ્યું છે…', 'auth.signIn': 'સાઇન ઇન', 'auth.signUp': 'ખાતું બનાવો', 'auth.fullName': 'પૂરું નામ', 'auth.email': 'ઇમેઇલ', 'auth.password': 'પાસવર્ડ', 'auth.confirmPassword': 'પાસવર્ડની પુષ્ટિ કરો', 'auth.language': 'પસંદગીની ભાષા', 'auth.forgot': 'પાસવર્ડ ભૂલી ગયા?' });
+const pa = makeLocale({ 'nav.home': 'ਮੁੱਖ ਪੰਨਾ', 'nav.weather': 'ਮੌਸਮ', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'ਚੇਤਾਵਨੀਆਂ', 'nav.map': 'ਨਕਸ਼ਾ', 'nav.about': 'ਜਾਣਕਾਰੀ', 'nav.signin': 'ਸਾਈਨ ਇਨ', 'nav.signup': 'ਖਾਤਾ ਬਣਾਓ', 'nav.dashboard': 'ਡੈਸ਼ਬੋਰਡ', 'nav.profile': 'ਪ੍ਰੋਫ਼ਾਈਲ', 'nav.settings': 'ਸੈਟਿੰਗਾਂ', 'nav.logout': 'ਲੌਗ ਆਊਟ', 'common.search': 'ਖੋਜੋ', 'common.searchPlaceholder': 'ਸ਼ਹਿਰ, ਕਸਬਾ ਜਾਂ ਜ਼ਿਲ੍ਹਾ ਖੋਜੋ', 'common.useMyLocation': 'ਮੇਰਾ ਸਥਾਨ ਵਰਤੋ', 'common.save': 'ਸੰਭਾਲੋ', 'common.delete': 'ਮਿਟਾਓ', 'common.cancel': 'ਰੱਦ ਕਰੋ', 'common.retry': 'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ', 'common.today': 'ਅੱਜ', 'common.tomorrow': 'ਕੱਲ੍ਹ', 'common.now': 'ਹੁਣ', 'common.sources': 'ਸਰੋਤ', 'loading.weather': 'ਮੌਸਮ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…', 'loading.thinking': 'WeatherGPT ਸੋਚ ਰਿਹਾ ਹੈ…', 'loading.alerts': 'ਚੇਤਾਵਨੀਆਂ ਲੋਡ ਹੋ ਰਹੀਆਂ ਹਨ…', 'empty.alerts': 'ਕੋਈ ਸਰਗਰਮ ਚੇਤਾਵਨੀ ਨਹੀਂ।', 'empty.weather': 'ਮੌਸਮ ਦੀ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ।', 'weather.current': 'ਮੌਜੂਦਾ ਮੌਸਮ', 'weather.humidity': 'ਨਮੀ', 'weather.wind': 'ਹਵਾ', 'weather.rainChance': 'ਮੀਂਹ ਦੀ ਸੰਭਾਵਨਾ', 'weather.hourly': 'ਅਗਲੇ 24 ਘੰਟੇ', 'weather.daily': '7 ਦਿਨਾਂ ਦੀ ਭਵਿੱਖਬਾਣੀ', 'weather.charts': 'ਭਵਿੱਖਬਾਣੀ ਚਾਰਟ', 'risk.title': 'WeatherGPT ਜੋਖਮ ਮੁਲਾਂਕਣ', 'risk.level': 'ਜੋਖਮ ਪੱਧਰ', 'risk.advisory': 'ਕੀ ਕਰਨਾ ਹੈ', 'risk.LOW': 'ਘੱਟ', 'risk.MODERATE': 'ਦਰਮਿਆਨਾ', 'risk.HIGH': 'ਵੱਧ', 'risk.SEVERE': 'ਗੰਭੀਰ', 'alerts.official': 'ਅਧਿਕਾਰਤ ਮੌਸਮ ਚੇਤਾਵਨੀ', 'alerts.generated': 'WeatherGPT ਜੋਖਮ ਮੁਲਾਂਕਣ', 'chat.title': 'WeatherGPT ਨੂੰ ਪੁੱਛੋ', 'chat.send': 'ਭੇਜੋ', 'chat.clear': 'ਚੈਟ ਸਾਫ਼ ਕਰੋ', 'chat.suggestions': 'ਇਹ ਪੁੱਛ ਕੇ ਵੇਖੋ', 'chat.listening': 'ਸੁਣ ਰਿਹਾ ਹੈ…', 'auth.signIn': 'ਸਾਈਨ ਇਨ', 'auth.signUp': 'ਖਾਤਾ ਬਣਾਓ', 'auth.fullName': 'ਪੂਰਾ ਨਾਮ', 'auth.email': 'ਈਮੇਲ', 'auth.password': 'ਪਾਸਵਰਡ', 'auth.confirmPassword': 'ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ', 'auth.language': 'ਪਸੰਦੀਦਾ ਭਾਸ਼ਾ', 'auth.forgot': 'ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?' });
+const or = makeLocale({ 'nav.home': 'ମୁଖ୍ୟ ପୃଷ୍ଠା', 'nav.weather': 'ପାଣିପାଗ', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'ସତର୍କତା', 'nav.map': 'ମାନଚିତ୍ର', 'nav.about': 'ପରିଚୟ', 'nav.signin': 'ସାଇନ୍ ଇନ୍', 'nav.signup': 'ଖାତା ଖୋଲନ୍ତୁ', 'nav.dashboard': 'ଡ୍ୟାସବୋର୍ଡ', 'nav.profile': 'ପ୍ରୋଫାଇଲ୍', 'nav.settings': 'ସେଟିଂସ୍', 'nav.logout': 'ଲଗ୍ ଆଉଟ୍', 'common.search': 'ଖୋଜନ୍ତୁ', 'common.searchPlaceholder': 'ସହର, ସହରତଳି କିମ୍ବା ଜିଲ୍ଲା ଖୋଜନ୍ତୁ', 'common.useMyLocation': 'ମୋ ସ୍ଥାନ ବ୍ୟବହାର କରନ୍ତୁ', 'common.save': 'ସଞ୍ଚୟ କରନ୍ତୁ', 'common.delete': 'ଡିଲିଟ୍ କରନ୍ତୁ', 'common.cancel': 'ବାତିଲ୍ କରନ୍ତୁ', 'common.retry': 'ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ', 'common.today': 'ଆଜି', 'common.tomorrow': 'ଆସନ୍ତାକାଲି', 'common.now': 'ବର୍ତ୍ତମାନ', 'common.sources': 'ଉତ୍ସ', 'loading.weather': 'ପାଣିପାଗ ଲୋଡ୍ ହେଉଛି…', 'loading.thinking': 'WeatherGPT ଭାବୁଛି…', 'loading.alerts': 'ସତର୍କତା ଲୋଡ୍ ହେଉଛି…', 'empty.alerts': 'କୌଣସି ସକ୍ରିୟ ସତର୍କତା ନାହିଁ।', 'empty.weather': 'ପାଣିପାଗ ତଥ୍ୟ ଉପଲବ୍ଧ ନାହିଁ।', 'weather.current': 'ବର୍ତ୍ତମାନର ପାଣିପାଗ', 'weather.humidity': 'ଆର୍ଦ୍ରତା', 'weather.wind': 'ପବନ', 'weather.rainChance': 'ବର୍ଷାର ସମ୍ଭାବନା', 'weather.hourly': 'ପରବର୍ତ୍ତୀ 24 ଘଣ୍ଟା', 'weather.daily': '7 ଦିନର ପୂର୍ବାନୁମାନ', 'weather.charts': 'ପୂର୍ବାନୁମାନ ଚାର୍ଟ', 'risk.title': 'WeatherGPT ବିପଦ ମୂଲ୍ୟାଙ୍କନ', 'risk.level': 'ବିପଦ ସ୍ତର', 'risk.advisory': 'କଣ କରିବେ', 'risk.LOW': 'କମ୍', 'risk.MODERATE': 'ମଧ୍ୟମ', 'risk.HIGH': 'ଅଧିକ', 'risk.SEVERE': 'ଗୁରୁତର', 'alerts.official': 'ସରକାରୀ ପାଣିପାଗ ସତର୍କତା', 'alerts.generated': 'WeatherGPT ବିପଦ ମୂଲ୍ୟାଙ୍କନ', 'chat.title': 'WeatherGPTଙ୍କୁ ପଚାରନ୍ତୁ', 'chat.send': 'ପଠାନ୍ତୁ', 'chat.clear': 'ଚାଟ୍ ସଫା କରନ୍ତୁ', 'chat.suggestions': 'ଏପରି ପଚାରି ଦେଖନ୍ତୁ', 'chat.listening': 'ଶୁଣୁଛି…', 'auth.signIn': 'ସାଇନ୍ ଇନ୍', 'auth.signUp': 'ଖାତା ଖୋଲନ୍ତୁ', 'auth.fullName': 'ପୂରା ନାମ', 'auth.email': 'ଇମେଲ୍', 'auth.password': 'ପାସୱାର୍ଡ', 'auth.confirmPassword': 'ପାସୱାର୍ଡ ନିଶ୍ଚିତ କରନ୍ତୁ', 'auth.language': 'ପସନ୍ଦର ଭାଷା', 'auth.forgot': 'ପାସୱାର୍ଡ ଭୁଲିଗଲେ?' });
+const as = makeLocale({ 'nav.home': 'হোম', 'nav.weather': 'বতৰ', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'সতৰ্কতা', 'nav.map': 'মানচিত্ৰ', 'nav.about': 'পৰিচয়', 'nav.signin': 'ছাইন ইন', 'nav.signup': 'একাউণ্ট সৃষ্টি কৰক', 'nav.dashboard': 'ডেশ্বব’ৰ্ড', 'nav.profile': 'প্ৰ’ফাইল', 'nav.settings': 'ছেটিংছ', 'nav.logout': 'লগ আউট', 'common.search': 'বিচাৰক', 'common.searchPlaceholder': 'চহৰ, নগৰ বা জিলা বিচাৰক', 'common.useMyLocation': 'মোৰ অৱস্থান ব্যৱহাৰ কৰক', 'common.save': 'সংৰক্ষণ কৰক', 'common.delete': 'মচক', 'common.cancel': 'বাতিল কৰক', 'common.retry': 'পুনৰ চেষ্টা কৰক', 'common.today': 'আজি', 'common.tomorrow': 'কাইলৈ', 'common.now': 'এতিয়া', 'common.sources': 'উৎসসমূহ', 'loading.weather': 'বতৰ লোড হৈ আছে…', 'loading.thinking': 'WeatherGPT-এ ভাবি আছে…', 'loading.alerts': 'সতৰ্কতা লোড হৈ আছে…', 'empty.alerts': 'কোনো সক্ৰিয় সতৰ্কতা নাই।', 'empty.weather': 'বতৰৰ তথ্য উপলব্ধ নহয়।', 'weather.current': 'বৰ্তমানৰ বতৰ', 'weather.humidity': 'আৰ্দ্ৰতা', 'weather.wind': 'বতাহ', 'weather.rainChance': 'বৰষুণৰ সম্ভাৱনা', 'weather.hourly': 'পৰৱৰ্তী 24 ঘণ্টা', 'weather.daily': '7 দিনৰ পূৰ্বানুমান', 'weather.charts': 'পূৰ্বানুমান চাৰ্ট', 'risk.title': 'WeatherGPT বিপদ মূল্যায়ন', 'risk.level': 'বিপদৰ স্তৰ', 'risk.advisory': 'কি কৰিব', 'risk.LOW': 'কম', 'risk.MODERATE': 'মধ্যম', 'risk.HIGH': 'বেছি', 'risk.SEVERE': 'তীব্ৰ', 'alerts.official': 'চৰকাৰী বতৰ সতৰ্কতা', 'alerts.generated': 'WeatherGPT বিপদ মূল্যায়ন', 'chat.title': 'WeatherGPT-ক সোধক', 'chat.send': 'পঠিয়াওক', 'chat.clear': 'চেট পৰিষ্কাৰ কৰক', 'chat.suggestions': 'এনেদৰে সুধি চাওক', 'chat.listening': 'শুনি আছে…', 'auth.signIn': 'ছাইন ইন', 'auth.signUp': 'একাউণ্ট সৃষ্টি কৰক', 'auth.fullName': 'সম্পূৰ্ণ নাম', 'auth.email': 'ইমেইল', 'auth.password': 'পাছৱৰ্ড', 'auth.confirmPassword': 'পাছৱৰ্ড নিশ্চিত কৰক', 'auth.language': 'পছন্দৰ ভাষা', 'auth.forgot': 'পাছৱৰ্ড পাহৰিলে?' });
+const ur = makeLocale({ 'nav.home': 'ہوم', 'nav.weather': 'موسم', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'انتباہات', 'nav.map': 'نقشہ', 'nav.about': 'تعارف', 'nav.signin': 'سائن اِن', 'nav.signup': 'اکاؤنٹ بنائیں', 'nav.dashboard': 'ڈیش بورڈ', 'nav.profile': 'پروفائل', 'nav.settings': 'ترتیبات', 'nav.logout': 'لاگ آؤٹ', 'common.search': 'تلاش', 'common.searchPlaceholder': 'شہر، قصبہ یا ضلع تلاش کریں', 'common.useMyLocation': 'میرا مقام استعمال کریں', 'common.save': 'محفوظ کریں', 'common.delete': 'حذف کریں', 'common.cancel': 'منسوخ کریں', 'common.retry': 'دوبارہ کوشش کریں', 'common.today': 'آج', 'common.tomorrow': 'کل', 'common.now': 'ابھی', 'common.sources': 'ذرائع', 'loading.weather': 'موسم لوڈ ہو رہا ہے…', 'loading.thinking': 'WeatherGPT سوچ رہا ہے…', 'loading.alerts': 'انتباہات لوڈ ہو رہے ہیں…', 'empty.alerts': 'کوئی فعال انتباہ نہیں۔', 'empty.weather': 'موسم کا ڈیٹا دستیاب نہیں۔', 'weather.current': 'موجودہ موسم', 'weather.humidity': 'نمی', 'weather.wind': 'ہوا', 'weather.rainChance': 'بارش کا امکان', 'weather.hourly': 'اگلے 24 گھنٹے', 'weather.daily': '7 دن کی پیش گوئی', 'weather.charts': 'پیش گوئی کے چارٹ', 'risk.title': 'WeatherGPT خطرے کا جائزہ', 'risk.level': 'خطرے کی سطح', 'risk.advisory': 'کیا کرنا ہے', 'risk.LOW': 'کم', 'risk.MODERATE': 'درمیانہ', 'risk.HIGH': 'زیادہ', 'risk.SEVERE': 'شدید', 'alerts.official': 'سرکاری موسمی انتباہ', 'alerts.generated': 'WeatherGPT خطرے کا جائزہ', 'chat.title': 'WeatherGPT سے پوچھیں', 'chat.send': 'بھیجیں', 'chat.clear': 'چیٹ صاف کریں', 'chat.suggestions': 'یہ پوچھ کر دیکھیں', 'chat.listening': 'سن رہا ہے…', 'auth.signIn': 'سائن اِن', 'auth.signUp': 'اکاؤنٹ بنائیں', 'auth.fullName': 'پورا نام', 'auth.email': 'ای میل', 'auth.password': 'پاس ورڈ', 'auth.confirmPassword': 'پاس ورڈ کی تصدیق کریں', 'auth.language': 'پسندیدہ زبان', 'auth.forgot': 'پاس ورڈ بھول گئے؟' });
+const kok = makeLocale({ 'nav.home': 'मुखेल पान', 'nav.weather': 'हवामान', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'इशारे', 'nav.map': 'नकाशो', 'nav.about': 'म्हायती', 'nav.signin': 'साइन इन', 'nav.signup': 'खातें तयार करात', 'nav.dashboard': 'डॅशबोर्ड', 'nav.profile': 'प्रोफायल', 'nav.settings': 'सेटिंग्ज', 'nav.logout': 'लॉग आऊट', 'common.search': 'सोदात', 'common.searchPlaceholder': 'शार, गांव वा जिल्हो सोदात', 'common.useMyLocation': 'म्हाजें स्थान वापरात', 'common.save': 'जतन करात', 'common.delete': 'काडात', 'common.cancel': 'रद्द करात', 'common.retry': 'परत येत्न करात', 'common.today': 'आयज', 'common.tomorrow': 'फाल्यां', 'common.now': 'आतां', 'common.sources': 'स्रोत', 'loading.weather': 'हवामान लोड जाता…', 'loading.thinking': 'WeatherGPT विचार करता…', 'loading.alerts': 'इशारे लोड जातात…', 'empty.alerts': 'सक्रीय इशारे नात.', 'empty.weather': 'हवामान माहिती मेळना.', 'weather.current': 'सद्याचें हवामान', 'weather.humidity': 'आर्द्रता', 'weather.wind': 'वारो', 'weather.rainChance': 'पावसाची शक्यता', 'weather.hourly': 'फुडलें 24 वरां', 'weather.daily': '7 दिसांचो अंदाज', 'weather.charts': 'अंदाजाचे चार्ट', 'risk.title': 'WeatherGPT जोखीम मुल्यांकन', 'risk.level': 'जोखीमेची पातळी', 'risk.advisory': 'कितें करपाचें', 'risk.LOW': 'उणे', 'risk.MODERATE': 'मध्यम', 'risk.HIGH': 'चड', 'risk.SEVERE': 'गंभीर', 'alerts.official': 'अधिकृत हवामान इशारो', 'alerts.generated': 'WeatherGPT जोखीम मुल्यांकन', 'chat.title': 'WeatherGPT कडेन विचारात', 'chat.send': 'धाडात', 'chat.clear': 'चॅट साफ करात', 'chat.suggestions': 'अशें विचारून पळयात', 'chat.listening': 'आयकता…', 'auth.signIn': 'साइन इन', 'auth.signUp': 'खातें तयार करात', 'auth.fullName': 'सगळें नांव', 'auth.email': 'ईमेल', 'auth.password': 'पासवर्ड', 'auth.confirmPassword': 'पासवर्डाची खात्री करात', 'auth.language': 'आवडती भास', 'auth.forgot': 'पासवर्ड विसरलात?' });
+
+export const translations = {
+  en,
+  hi: { ...en, ...hi },
+  kn: { ...en, ...kn },
+  ta: { ...en, ...ta },
+  te: { ...en, ...te },
+  ml,
+  mr,
+  bn,
+  gu,
+  pa,
+  or,
+  as,
+  ur,
+  kok,
+};
+
+export function missingTranslationKeys(locale) {
+  return Object.keys(en).filter((key) => !translations[locale]?.[key]);
+}
 export default translations;

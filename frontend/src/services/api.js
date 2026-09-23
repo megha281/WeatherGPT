@@ -1,4 +1,5 @@
 import axios from 'axios';
+import translations from '../i18n/translations';
 
 const baseURL = import.meta.env.VITE_API_URL || '/api';
 
@@ -9,6 +10,8 @@ const api = axios.create({ baseURL, timeout: 45000 });
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(TOKEN_KEY);
   if (token) config.headers.Authorization = `Bearer ${token}`;
+  const language = localStorage.getItem('weathergpt.language') || 'en';
+  config.headers['Accept-Language'] = language;
   return config;
 });
 
@@ -16,13 +19,15 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status;
+    const language = localStorage.getItem('weathergpt.language') || 'en';
+    const local = translations[language] || translations.en;
     const message =
       error.response?.data?.message ||
       (error.code === 'ECONNABORTED'
-        ? 'That took too long. Check your connection and try again.'
+        ? local['errors.timeout']
         : !error.response
-          ? 'Cannot reach the WeatherGPT server. Make sure the backend is running on port 5000.'
-          : 'Something went wrong. Try again.');
+          ? local['errors.server']
+          : local['errors.generic']);
 
     if (status === 401 && localStorage.getItem(TOKEN_KEY)) {
       localStorage.removeItem(TOKEN_KEY);

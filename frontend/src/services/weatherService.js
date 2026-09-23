@@ -14,7 +14,6 @@ export const weatherService = {
   models: (lat, lon, days = 3) => api.get('/weather/models', { params: { lat, lon, days } }).then((r) => r.data),
 
   alerts: (lat, lon, name) => api.get('/alerts', { params: { lat, lon, name } }).then((r) => r.data.data),
-  climate: (lat, lon, years = 10) => api.get('/climate', { params: { lat, lon, years } }).then((r) => r.data.data),
   analyzeRisk: (payload) => api.post('/risk/analyze', payload).then((r) => r.data.data),
 };
 

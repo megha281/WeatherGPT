@@ -2,9 +2,6 @@
 
 Conversational AI for weather forecasting, alerts, climate information and actionable insights.
 
-**Smart India Hackathon 2026** · Problem statement **SIH26068** · Theme: Disaster Management · Category: Software
-**Team ID KU40 — Binary Brains**
-
 ---
 
 ## What it is
@@ -191,7 +188,7 @@ npm test
 The suite covers the risk engine, date and time-of-day parsing, knowledge retrieval, and the HTTP API. Tests that need
 MongoDB or internet access skip themselves with a message rather than failing when those are unavailable.
 
-## Demo flow for the SIH presentation
+## Demo flow
 
 1. Landing page — live conditions for the visitor's location.
 2. Register an account, choosing a language and a default location.

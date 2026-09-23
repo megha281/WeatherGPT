@@ -17,6 +17,19 @@ body {
   margin: 0;
 }
 
+html[dir='rtl'] {
+  direction: rtl;
+}
+
+html[dir='rtl'] .leaflet-control,
+html[dir='rtl'] .recharts-wrapper {
+  direction: ltr;
+}
+
+html[dir='rtl'] .field {
+  text-align: right;
+}
+
 /* Focus styles stay visible for keyboard users everywhere. */
 :focus-visible {
   outline: 2px solid #5ad7fb;

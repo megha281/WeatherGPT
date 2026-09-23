@@ -8,7 +8,6 @@ import Landing from './pages/Landing';
 import Weather from './pages/Weather';
 import WeatherGPTChat from './pages/WeatherGPTChat';
 import Alerts from './pages/Alerts';
-import Climate from './pages/Climate';
 import MapPage from './pages/MapPage';
 import About from './pages/About';
 import Login from './pages/Login';
@@ -45,7 +44,6 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="/alerts" element={<Alerts />} />
-          <Route path="/climate" element={<Climate />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/about" element={<About />} />
 

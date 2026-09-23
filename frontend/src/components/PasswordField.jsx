@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PasswordField({ id, label, value, onChange, autoComplete = 'current-password', hint }) {
   const [visible, setVisible] = useState(false);
+  const { t } = useLanguage();
   return (
     <div>
       <label htmlFor={id} className="label">{label}</label>
@@ -21,7 +23,7 @@ export default function PasswordField({ id, label, value, onChange, autoComplete
           type="button"
           onClick={() => setVisible((v) => !v)}
           className="absolute inset-y-0 right-0 grid w-12 place-items-center text-mist-300 hover:text-white"
-          aria-label={visible ? 'Hide password' : 'Show password'}
+          aria-label={visible ? t('common.hidePassword') : t('common.showPassword')}
         >
           {visible ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
         </button>

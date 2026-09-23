@@ -20,7 +20,10 @@ const alertService = require('./alertService');
 const { analyzeRisk, analyzeFromForecast } = require('./riskEngine');
 const { parseWhen } = require('../utils/dateParse');
 
-const LANGUAGE_NAMES = { en: 'English', hi: 'Hindi', kn: 'Kannada', ta: 'Tamil', te: 'Telugu' };
+const LANGUAGE_NAMES = {
+  en: 'English', hi: 'Hindi', kn: 'Kannada', te: 'Telugu', ta: 'Tamil', ml: 'Malayalam', mr: 'Marathi',
+  bn: 'Bengali', gu: 'Gujarati', pa: 'Punjabi', or: 'Odia', as: 'Assamese', ur: 'Urdu', kok: 'Konkani',
+};
 const MAX_TOOL_ROUNDS = 5;
 
 /* --------------------------- tool declarations --------------------------- */
@@ -198,7 +201,7 @@ async function executeTool(name, args = {}, ctx) {
 
 function buildSystemInstruction({ language, location, now }) {
   const langName = LANGUAGE_NAMES[language] || 'English';
-  return `You are WeatherGPT, a conversational weather assistant built for Smart India Hackathon 2026 (problem SIH26068, Disaster Management theme).
+  return `You are WeatherGPT, a conversational weather assistant for clear, reliable weather information.
 
 Current date and time: ${now.toString()}.
 Active location: ${location ? `${location.name}${location.state ? ', ' + location.state : ''}${location.country ? ', ' + location.country : ''} (${location.latitude}, ${location.longitude})` : 'not set - ask or resolve one with getLocation'}.
@@ -212,6 +215,7 @@ Hard rules:
 
 Answering style:
 - Reply in ${langName}. Keep numbers and units in digits (28°C, 80%, 15 km/h) whatever the language.
+- Write the complete answer in ${langName}; do not begin in ${langName} and switch to English. English is allowed only for proper nouns, units, URLs, scientific names, or official names.
 - Lead with a direct answer to the question asked, then the few numbers that support it, then one practical recommendation.
 - Be concise: about 60 to 120 words unless the user asks for detail. Plain sentences, no headings, at most a couple of short bullet lines.
 - Give advice a person can act on ("rain is likely after 6 pm, carry an umbrella and leave 15 minutes early") rather than raw values alone.

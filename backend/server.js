@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
   res.json({
     name: 'WeatherGPT API',
     description: 'Conversational AI for weather forecasting, alerts and climate information',
-    hackathon: { event: 'Smart India Hackathon 2026', problemStatement: 'SIH26068', team: 'Binary Brains (KU40)' },
     docs: '/api/health',
   });
 });

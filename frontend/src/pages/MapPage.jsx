@@ -8,9 +8,10 @@ import { useLanguage } from '../context/LanguageContext';
 import { useLocation } from '../context/LocationContext';
 import weatherService from '../services/weatherService';
 import { formatPercent, formatTemp, locationLabel } from '../utils/format';
+import { translateWeatherCondition } from '../i18n/localeData';
 
 export default function MapPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { location, setLocation } = useLocation();
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -44,7 +45,7 @@ export default function MapPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <h1 className="font-display text-3xl font-bold text-white">{t('nav.map')}</h1>
-      <p className="mt-1 text-mist-300">Search for a place, or tap anywhere on the map to read its weather.</p>
+      <p className="mt-1 text-mist-300">{t('map.description')}</p>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div>
@@ -60,10 +61,10 @@ export default function MapPage() {
                 <p className="font-semibold">{locationLabel(location)}</p>
                 {current ? (
                   <p className="mt-1 text-sm">
-                    {formatTemp(current.temperature)} · {current.condition}
+                    {formatTemp(current.temperature)} · {translateWeatherCondition(language, current.condition)}
                   </p>
                 ) : (
-                  <p className="mt-1 text-sm">Loading weather…</p>
+                  <p className="mt-1 text-sm">{t('map.loading')}</p>
                 )}
               </div>
             }
@@ -71,7 +72,7 @@ export default function MapPage() {
         </div>
 
         <aside className="panel h-fit p-5">
-          <p className="text-sm text-mist-300">Selected location</p>
+          <p className="text-sm text-mist-300">{t('map.selected')}</p>
           <h2 className="mt-1 font-display text-xl font-bold text-white">{locationLabel(location)}</h2>
           <p className="mt-1 text-xs text-mist-400">
             {Number(location?.latitude).toFixed(4)}, {Number(location?.longitude).toFixed(4)}
@@ -82,7 +83,7 @@ export default function MapPage() {
           ) : current ? (
             <>
               <p className="mt-4 font-display text-4xl font-extrabold text-white">{formatTemp(current.temperature)}</p>
-              <p className="text-mist-200">{current.condition}</p>
+              <p className="text-mist-200">{translateWeatherCondition(language, current.condition)}</p>
               <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div className="panel-tight p-3">
                   <dt className="text-mist-400">{t('weather.feelsLike')}</dt>
@@ -112,8 +113,8 @@ export default function MapPage() {
             <p className="mt-4 text-sm text-mist-300">{t('empty.weather')}</p>
           )}
 
-          <Link to="/weather-gpt" className="btn-ghost mt-5 w-full">Ask about this place</Link>
-          <p className="mt-3 text-xs text-mist-400">Map tiles © OpenStreetMap contributors. Weather: Open-Meteo.</p>
+          <Link to="/weather-gpt" className="btn-ghost mt-5 w-full">{t('map.ask')}</Link>
+          <p className="mt-3 text-xs text-mist-400">{t('map.attribution')}</p>
         </aside>
       </div>
     </div>

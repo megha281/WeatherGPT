@@ -1,14 +1,16 @@
 import { Loader2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Spinner({ className = 'h-4 w-4' }) {
   return <Loader2 className={`${className} animate-spin`} aria-hidden="true" />;
 }
 
-export function LoadingBlock({ label = 'Loading…', className = '' }) {
+export function LoadingBlock({ label, className = '' }) {
+  const { t } = useLanguage();
   return (
     <div className={`flex items-center gap-3 rounded-xl border border-white/10 bg-night-800/60 px-4 py-6 text-mist-300 ${className}`}>
       <Spinner className="h-5 w-5 text-signal-400" />
-      <span>{label}</span>
+      <span>{label || t('common.loading')}</span>
     </div>
   );
 }

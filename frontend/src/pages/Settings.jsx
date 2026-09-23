@@ -64,7 +64,7 @@ export default function Settings() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <h1 className="font-display text-3xl font-extrabold text-white">{t('nav.settings')}</h1>
-      <p className="mt-1 text-mist-300">These preferences apply across the dashboard, alerts and chat.</p>
+      <p className="mt-1 text-mist-300">{t('settings.description')}</p>
 
       <form onSubmit={save} className="panel mt-6 space-y-5 p-5">
         <div>
@@ -77,7 +77,7 @@ export default function Settings() {
             ))}
           </select>
           <p className="mt-1.5 text-xs text-mist-400">
-            Temperatures, percentages and wind speeds always stay as digits, in every language.
+            {t('settings.unitsDigits')}
           </p>
         </div>
 
@@ -85,20 +85,20 @@ export default function Settings() {
           <span className="label">{t('auth.defaultLocation')}</span>
           <LocationSearch showMyLocation={false} onSelect={(p) => setPlace(p)} />
           <p className="mt-1.5 text-xs text-mist-400">
-            {place ? `Selected: ${place.label || place.name}` : 'No default location set.'}
+            {place ? t('settings.selectedLocation', { name: place.label || place.name }) : t('settings.noLocation')}
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="label" htmlFor="unit">Temperature unit</label>
+            <label className="label" htmlFor="unit">{t('settings.temperature')}</label>
             <select id="unit" className="field" value={form.temperatureUnit} onChange={(e) => set('temperatureUnit', e.target.value)}>
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
+              <option value="celsius">{t('settings.celsius')}</option>
+              <option value="fahrenheit">{t('settings.fahrenheit')}</option>
             </select>
           </div>
           <div>
-            <label className="label" htmlFor="wind">Wind unit</label>
+            <label className="label" htmlFor="wind">{t('settings.wind')}</label>
             <select id="wind" className="field" value={form.windUnit} onChange={(e) => set('windUnit', e.target.value)}>
               <option value="kmh">km/h</option>
               <option value="ms">m/s</option>
@@ -108,7 +108,7 @@ export default function Settings() {
         </div>
 
         <div>
-          <label className="label" htmlFor="severity">Show alerts from severity</label>
+          <label className="label" htmlFor="severity">{t('settings.alertSeverity')}</label>
           <select
             id="severity"
             className="field"
@@ -117,14 +117,14 @@ export default function Settings() {
           >
             {SEVERITIES.map((s) => (
               <option key={s} value={s}>
-                {t(`risk.${s}`)} and above
+                {t('settings.andAbove', { level: t(`risk.${s}`) })}
               </option>
             ))}
           </select>
         </div>
 
         <fieldset className="space-y-3">
-          <legend className="label">Notification preferences</legend>
+          <legend className="label">{t('settings.notifications')}</legend>
           <label className="flex items-center gap-3 text-sm text-mist-200">
             <input
               type="checkbox"
@@ -132,7 +132,7 @@ export default function Settings() {
               checked={form.emailNotifications}
               onChange={(e) => set('emailNotifications', e.target.checked)}
             />
-            Email me about alerts for my default location
+            {t('settings.emailAlerts')}
           </label>
           <label className="flex items-center gap-3 text-sm text-mist-200">
             <input
@@ -141,11 +141,10 @@ export default function Settings() {
               checked={form.severeWeatherOnly}
               onChange={(e) => set('severeWeatherOnly', e.target.checked)}
             />
-            Only for severe weather
+            {t('settings.severeOnly')}
           </label>
           <p className="text-xs text-mist-400">
-            Email delivery needs SMTP credentials in the backend <code>.env</code>. Without them the preference is
-            stored but no mail is sent.
+            {t('settings.smtp')}
           </p>
         </fieldset>
 

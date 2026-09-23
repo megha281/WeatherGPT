@@ -8,10 +8,11 @@ import ChatMessage from '../components/ChatMessage';
 import ChatComposer from '../components/ChatComposer';
 import TypingIndicator from '../components/TypingIndicator';
 import LocationSearch from '../components/LocationSearch';
-import SUGGESTED_QUESTIONS from '../utils/suggestions';
+import { getSuggestedQuestions } from '../utils/suggestions';
 
 export default function WeatherGPTChat() {
   const { t, language } = useLanguage();
+  const suggestedQuestions = getSuggestedQuestions(t);
   const { location } = useLocation();
   const routerLocation = useRouterLocation();
   const [searchParams] = useSearchParams();
@@ -103,15 +104,11 @@ export default function WeatherGPTChat() {
         <div ref={scrollRef} className="flex-1 space-y-5 overflow-y-auto p-4 sm:p-6">
           {messages.length === 0 && !busy ? (
             <div className="py-6">
-              <p className="font-display text-xl font-bold text-white">Ask about the weather where you are.</p>
-              <p className="mt-2 text-sm text-mist-300">
-                Every number in the answer comes from Open-Meteo for the place and time you asked about. Risk levels
-                come from our rule engine and are always labelled as a WeatherGPT Risk Assessment, never as an official
-                warning.
-              </p>
+              <p className="font-display text-xl font-bold text-white">{t('chat.welcome')}</p>
+              <p className="mt-2 text-sm text-mist-300">{t('chat.grounded')}</p>
               <p className="mt-6 text-sm text-mist-400">{t('chat.suggestions')}</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {SUGGESTED_QUESTIONS.map((q) => (
+                {suggestedQuestions.map((q) => (
                   <button key={q} type="button" onClick={() => send(q)} className="chip hover:border-signal-500/60">
                     {q}
                   </button>
@@ -134,8 +131,7 @@ export default function WeatherGPTChat() {
       </section>
 
       <p className="mt-3 text-xs text-mist-400">
-        Weather data: Open-Meteo · Knowledge: WeatherGPT Knowledge Base · AI: Google Gemini. Gemini explains the data;
-        it does not produce the measurements.
+        {t('chat.sourcesFooter')}
       </p>
     </div>
   );

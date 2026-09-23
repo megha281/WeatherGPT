@@ -92,7 +92,7 @@ export default function LocationSearch({ onSelect, autoFocus = false, showMyLoca
         <ul className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-white/10 bg-night-800 shadow-panel">
           {results.length === 0 && !loading ? (
             <li className="px-4 py-3 text-sm text-mist-300">
-              No place matches “{debounced}”. Try a nearby city or district name.
+              {t('locations.noMatch', { query: debounced })}
             </li>
           ) : null}
           {results.map((place) => (

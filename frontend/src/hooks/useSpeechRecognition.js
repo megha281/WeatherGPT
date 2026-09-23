@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const SPEECH_LOCALES = { en: 'en-IN', hi: 'hi-IN', kn: 'kn-IN', ta: 'ta-IN', te: 'te-IN' };
+import { LANGUAGE_META } from '../i18n/localeData';
+import translations from '../i18n/translations';
+
+const SPEECH_LOCALES = Object.fromEntries(LANGUAGE_META.map(({ code, speech }) => [code, speech]));
 
 /**
  * Browser speech recognition (Chrome and Edge). Returns supported=false
@@ -27,13 +30,13 @@ export default function useSpeechRecognition({ language = 'en', onResult } = {})
 
   const start = useCallback(() => {
     if (!supported) {
-      setError('Voice input is not supported in this browser. Try Chrome or Edge.');
+      setError(translations[language]?.['voice.unsupported'] || translations.en['voice.unsupported']);
       return;
     }
     setError(null);
 
     const recognition = new SpeechRecognition();
-    recognition.lang = SPEECH_LOCALES[language] || 'en-IN';
+    recognition.lang = SPEECH_LOCALES[language] || SPEECH_LOCALES.en;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     recognition.continuous = false;
@@ -45,8 +48,8 @@ export default function useSpeechRecognition({ language = 'en', onResult } = {})
     recognition.onerror = (event) => {
       setError(
         event.error === 'not-allowed'
-          ? 'Microphone permission was denied. Allow it in the browser address bar to use voice.'
-          : 'Could not catch that. Try again, or type the question.'
+          ? translations[language]?.['voice.permission'] || translations.en['voice.permission']
+          : translations[language]?.['voice.failed'] || translations.en['voice.failed']
       );
       setListening(false);
     };

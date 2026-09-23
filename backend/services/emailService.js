@@ -24,7 +24,7 @@ function wrap(title, bodyHtml) {
       <h1 style="font-size:20px;margin:0 0 14px;color:#fff">${title}</h1>
       ${bodyHtml}
       <p style="margin-top:26px;font-size:12px;color:#8aa5b6">
-        WeatherGPT — Smart India Hackathon 2026 · SIH26068 · Team Binary Brains
+        WeatherGPT — Understand the weather. Plan with confidence.
       </p>
     </div></div>`;
 }

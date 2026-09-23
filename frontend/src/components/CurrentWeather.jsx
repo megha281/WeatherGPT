@@ -2,6 +2,7 @@ import { Droplets, Eye, Gauge, Sunrise, Sunset, Sun, Thermometer, Umbrella, Wind
 import { useLanguage } from '../context/LanguageContext';
 import { formatNumber, formatPercent, formatTemp, formatTime, windDirectionLabel } from '../utils/format';
 import { skyGradient, uvLabel, weatherIcon } from '../utils/weatherVisuals';
+import { translateWeatherCondition } from '../i18n/localeData';
 
 function Metric({ icon: Icon, label, value, hint }) {
   return (
@@ -18,7 +19,7 @@ function Metric({ icon: Icon, label, value, hint }) {
 
 /** The dashboard hero: one big reading, everything else quiet around it. */
 export default function CurrentWeather({ current, location }) {
-  const { t } = useLanguage();
+  const { t, language, locale } = useLanguage();
   if (!current) return null;
 
   const Icon = weatherIcon(current.icon);
@@ -38,7 +39,7 @@ export default function CurrentWeather({ current, location }) {
               <Icon className="h-10 w-10 text-signal-400" aria-hidden="true" />
             </span>
           </div>
-          <p className="mt-2 text-mist-100">{current.condition}</p>
+          <p className="mt-2 text-mist-100">{translateWeatherCondition(language, current.condition)}</p>
           <p className="text-sm text-mist-300">
             {t('weather.feelsLike')} {formatTemp(current.feelsLike, unit)} · {t('weather.high')}{' '}
             {formatTemp(current.maxTemp, unit)} · {t('weather.low')} {formatTemp(current.minTemp, unit)}
@@ -54,7 +55,7 @@ export default function CurrentWeather({ current, location }) {
             <Sunset className="h-4 w-4 text-signal-400" aria-hidden="true" />
             {t('weather.sunset')} {formatTime(current.sunset)}
           </p>
-          <p className="mt-2 text-xs text-mist-400">Observed {formatTime(current.time)} · {current.timezone}</p>
+          <p className="mt-2 text-xs text-mist-400">{t('weather.observed')} {formatTime(current.time, { locale: locale.locale })} · {current.timezone}</p>
         </div>
       </div>
 
@@ -74,7 +75,7 @@ export default function CurrentWeather({ current, location }) {
           icon={Sun}
           label={t('weather.uvIndex')}
           value={current.uvIndexMax ?? current.uvIndex ?? '—'}
-          hint={uvLabel(current.uvIndexMax ?? current.uvIndex)}
+          hint={uvLabel(current.uvIndexMax ?? current.uvIndex, language)}
         />
         <Metric
           icon={Eye}

@@ -51,7 +51,7 @@ export default function Weather() {
         <div className="flex items-center gap-2">
           <button type="button" onClick={reload} className="btn-ghost">
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
-            Refresh
+            {t('common.refresh')}
           </button>
           <Link to="/weather-gpt" className="btn-primary">
             <MessageSquare className="h-4 w-4" aria-hidden="true" />
@@ -83,8 +83,8 @@ export default function Weather() {
           <ModelComparison data={models?.data} note={models?.note} />
           <SourceList
             sources={[
-              { kind: 'Weather data', name: 'Open-Meteo', url: 'https://open-meteo.com' },
-              { kind: 'Risk analysis', name: 'WeatherGPT Risk Engine (deterministic rules)' },
+              { kind: t('weather.sourceData'), name: 'Open-Meteo', url: 'https://open-meteo.com' },
+              { kind: t('weather.riskAnalysis'), name: t('weather.riskEngine') },
             ]}
           />
         </div>

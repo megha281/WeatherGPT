@@ -4,7 +4,7 @@ const logger = require('../utils/logger');
 const weatherService = require('./weatherService');
 const { analyzeRisk } = require('./riskEngine');
 
-const http = axios.create({ timeout: 10000, headers: { 'User-Agent': 'WeatherGPT/1.0 (SIH26068 student project)' } });
+const http = axios.create({ timeout: 10000, headers: { 'User-Agent': 'WeatherGPT/1.0' } });
 
 /**
  * Official alerts.

@@ -54,7 +54,7 @@ export default function SavedLocationsPanel({ allowAdd = true, compact = false }
       });
       setPicked(null);
       setLabel('');
-      setMessage('Saved.');
+      setMessage(t('locations.saved'));
       await load();
     } catch (err) {
       setMessage(err.message);
@@ -92,14 +92,14 @@ export default function SavedLocationsPanel({ allowAdd = true, compact = false }
             <div className="flex flex-wrap items-end gap-3">
               <div className="min-w-[12rem] flex-1">
                 <label className="label" htmlFor="saved-label">
-                  Label this place
+                  {t('locations.label')}
                 </label>
                 <input
                   id="saved-label"
                   className="field"
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
-                  placeholder={`Home, College, Work… (default: ${picked.name})`}
+                  placeholder={t('locations.labelPlaceholder', { name: picked.name })}
                 />
               </div>
               <button type="button" onClick={add} className="btn-primary" disabled={pending === 'add'}>
@@ -114,7 +114,7 @@ export default function SavedLocationsPanel({ allowAdd = true, compact = false }
 
       {locations.length === 0 ? (
         <div className="mt-4">
-          <EmptyState icon={MapPin} title={t('empty.savedLocations')} description="Save the places you check most — home, college, work." />
+          <EmptyState icon={MapPin} title={t('empty.savedLocations')} description={t('locations.saveHint')} />
         </div>
       ) : (
         <ul className="mt-4 grid gap-2">

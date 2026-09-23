@@ -29,7 +29,7 @@ export default function HourlyForecast({ hourly }) {
           );
         })}
       </div>
-      <p className="mt-2 text-xs text-mist-400">Scroll for the full 24 hours. Rain chance is the percentage under each hour.</p>
+      <p className="mt-2 text-xs text-mist-400">{t('weather.scrollHours')}</p>
     </section>
   );
 }

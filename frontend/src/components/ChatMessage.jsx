@@ -3,6 +3,7 @@ import RiskBadge from './RiskBadge';
 import SourceList from './SourceList';
 import { formatPercent, formatTemp, formatTime } from '../utils/format';
 import { useLanguage } from '../context/LanguageContext';
+import { translateWeatherCondition } from '../i18n/localeData';
 
 /** Renders **bold** and line breaks without pulling in a Markdown dependency. */
 function RichText({ text }) {
@@ -31,7 +32,7 @@ function RichText({ text }) {
 }
 
 export default function ChatMessage({ message }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const isUser = message.role === 'user';
   const data = message.structured || null;
 
@@ -63,7 +64,7 @@ export default function ChatMessage({ message }) {
           <div className="flex flex-wrap gap-2">
             {data.location?.name ? <span className="chip">{data.location.name}</span> : null}
             <span className="chip">
-              {formatTemp(data.weather.temperature, data.weather.units?.temperature || '°C')} · {data.weather.condition}
+              {formatTemp(data.weather.temperature, data.weather.units?.temperature || '°C')} · {translateWeatherCondition(language, data.weather.condition)}
             </span>
             {data.weather.rainProbability !== null && data.weather.rainProbability !== undefined ? (
               <span className="chip">{t('weather.rainChance')} {formatPercent(data.weather.rainProbability)}</span>

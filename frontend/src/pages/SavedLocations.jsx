@@ -8,7 +8,7 @@ export default function SavedLocations() {
       <header>
         <h1 className="font-display text-3xl font-extrabold text-white">{t('nav.savedLocations')}</h1>
         <p className="mt-1 text-mist-300">
-          Save the places you check most. Selecting one makes it the active location across every page.
+          {t('saved.description')}
         </p>
       </header>
 

@@ -70,19 +70,19 @@ export default function ChatHistory() {
     }
   };
 
-  if (loading) return <div className="mx-auto max-w-5xl px-4 py-16"><LoadingBlock label="Loading conversations…" /></div>;
+  if (loading) return <div className="mx-auto max-w-5xl px-4 py-16"><LoadingBlock label={t('history.loading')} /></div>;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-extrabold text-white">{t('nav.chatHistory')}</h1>
-          <p className="mt-1 text-mist-300">Conversations are saved to your account only while you are signed in.</p>
+          <p className="mt-1 text-mist-300">{t('history.description')}</p>
         </div>
         {chats.length ? (
           <button type="button" onClick={clearAll} className="btn-ghost" disabled={pending === 'all'}>
             {pending === 'all' ? <Spinner /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
-            Delete all
+            {t('history.deleteAll')}
           </button>
         ) : null}
       </header>
@@ -94,7 +94,7 @@ export default function ChatHistory() {
           <EmptyState
             icon={MessageSquare}
             title={t('empty.conversations')}
-            description="Ask WeatherGPT a question and it will be saved here."
+            description={t('history.askSaved')}
             actionLabel={t('chat.title')}
             actionTo="/weather-gpt"
           />
@@ -131,7 +131,7 @@ export default function ChatHistory() {
 
           <section className="panel p-5 lg:col-span-2">
             {loadingOne ? (
-              <LoadingBlock label="Opening conversation…" />
+              <LoadingBlock label={t('history.opening')} />
             ) : open ? (
               <>
                 <h2 className="section-title">{open.title}</h2>
@@ -146,7 +146,7 @@ export default function ChatHistory() {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-mist-300">Pick a conversation on the left to read it.</p>
+              <p className="text-sm text-mist-300">{t('history.pick')}</p>
             )}
           </section>
         </div>

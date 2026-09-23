@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import { formatPercent, formatTemp } from '../utils/format';
+import { useLanguage } from '../context/LanguageContext';
 
 // Leaflet's default marker images are bundled as assets; point them at the CDN
 // copies loaded in index.html so no bundler asset juggling is needed.
@@ -35,6 +36,7 @@ function ClickHandler({ onPick }) {
 }
 
 export default function MapView({ location, current, onPick, height = '28rem' }) {
+  const { t } = useLanguage();
   if (!location || !Number.isFinite(Number(location.latitude))) return null;
   const lat = Number(location.latitude);
   const lon = Number(location.longitude);
@@ -58,10 +60,10 @@ export default function MapView({ location, current, onPick, height = '28rem' })
               <p className="mt-1 text-sm">
                 {formatTemp(current.temperature, current.units?.temperature || '°C')} · {current.condition}
                 <br />
-                Rain chance {formatPercent(current.rainProbability)}
+                {t('weather.rainChance')} {formatPercent(current.rainProbability)}
               </p>
             ) : (
-              <p className="mt-1 text-sm opacity-80">Loading weather…</p>
+              <p className="mt-1 text-sm opacity-80">{t('map.loading')}</p>
             )}
           </Popup>
         </Marker>

@@ -11,7 +11,6 @@ router.get('/health', (req, res) => {
   res.json({
     success: true,
     service: 'WeatherGPT API',
-    problemStatement: 'SIH26068',
     time: new Date().toISOString(),
     checks: {
       database: isDBConnected() ? 'connected' : 'disconnected',

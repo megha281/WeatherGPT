@@ -2,7 +2,6 @@ import { Database, Sparkles, BookOpen, ShieldCheck } from 'lucide-react';
 
 const ICONS = {
   'Weather data': Database,
-  'Climate data': Database,
   Knowledge: BookOpen,
   'Risk analysis': ShieldCheck,
   AI: Sparkles,

@@ -6,8 +6,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { Spinner } from '../components/Loading';
 
 function passwordProblem(password) {
-  if (password.length < 8) return 'Use at least 8 characters.';
-  if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) return 'Include at least one letter and one number.';
+  if (password.length < 8) return 'auth.passwordLength';
+  if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) return 'auth.passwordRequirements';
   return null;
 }
 
@@ -27,8 +27,8 @@ export default function ResetPassword() {
     e.preventDefault();
     setError(null);
     const problem = passwordProblem(form.password);
-    if (problem) return setError(problem);
-    if (form.password !== form.confirmPassword) return setError('The two passwords do not match.');
+    if (problem) return setError(t(problem));
+    if (form.password !== form.confirmPassword) return setError(t('auth.passwordMismatch'));
 
     setBusy(true);
     try {
@@ -46,11 +46,11 @@ export default function ResetPassword() {
   return (
     <div className="mx-auto max-w-md px-4 py-16">
       <h1 className="font-display text-3xl font-extrabold text-white">{t('auth.resetPassword')}</h1>
-      <p className="mt-2 text-mist-300">Choose a new password for your account.</p>
+      <p className="mt-2 text-mist-300">{t('auth.newPasswordDescription')}</p>
 
       {done ? (
         <div className="panel mt-6 p-6">
-          <p className="text-mist-100">Password updated. Taking you to the sign-in page…</p>
+          <p className="text-mist-100">{t('auth.passwordUpdated')}</p>
           <Link to="/login" className="btn-primary mt-4">
             {t('auth.signIn')}
           </Link>
@@ -72,7 +72,7 @@ export default function ResetPassword() {
                 type="button"
                 onClick={() => setShow((v) => !v)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-mist-400 hover:text-white"
-                aria-label={show ? 'Hide password' : 'Show password'}
+                aria-label={show ? t('auth.hidePassword') : t('auth.showPassword')}
               >
                 {show ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
               </button>
@@ -95,7 +95,7 @@ export default function ResetPassword() {
 
           <button type="submit" className="btn-primary w-full" disabled={busy}>
             {busy ? <Spinner /> : <ShieldCheck className="h-4 w-4" aria-hidden="true" />}
-            {busy ? 'Updating…' : t('auth.resetPassword')}
+            {busy ? t('auth.updating') : t('auth.resetPassword')}
           </button>
         </form>
       )}

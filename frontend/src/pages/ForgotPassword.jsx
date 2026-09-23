@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     setError(null);
     if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
-      setError('Enter a valid email address.');
+      setError(t('auth.validEmail'));
       return;
     }
     setBusy(true);
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
     <div className="mx-auto max-w-md px-4 py-16">
       <h1 className="font-display text-3xl font-extrabold text-white">{t('auth.forgot')}</h1>
       <p className="mt-2 text-mist-300">
-        Enter the email on your account. If it exists, a reset link valid for 30 minutes will be sent.
+        {t('forgot.instructions')}
       </p>
 
       <form onSubmit={submit} className="panel mt-6 space-y-4 p-6" noValidate>
@@ -60,12 +60,12 @@ export default function ForgotPassword() {
 
         <button type="submit" className="btn-primary w-full" disabled={busy}>
           {busy ? <Spinner /> : <KeyRound className="h-4 w-4" aria-hidden="true" />}
-          {busy ? 'Sending…' : 'Send reset link'}
+          {busy ? t('forgot.sending') : t('forgot.send')}
         </button>
 
         <p className="text-sm text-mist-400">
           <Link to="/login" className="text-signal-400 hover:text-signal-300">
-            Back to {t('auth.signIn').toLowerCase()}
+            {t('forgot.back', { signIn: t('auth.signIn').toLowerCase() })}
           </Link>
         </p>
       </form>

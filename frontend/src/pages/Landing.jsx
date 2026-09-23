@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import {
-  AlertTriangle, BarChart3, Bot, CloudSun, Languages, Map, Mic, ShieldAlert, ArrowRight,
+  AlertTriangle, Bot, CloudSun, Languages, Map, Mic, ShieldAlert, ArrowRight,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import SUGGESTED_QUESTIONS from '../utils/suggestions';
+import { getSuggestedQuestions } from '../utils/suggestions';
 
 const FEATURES = [
   {
@@ -32,11 +32,6 @@ const FEATURES = [
     body: 'Pick any point on an OpenStreetMap layer and read the live conditions there, with the coordinates shown.',
   },
   {
-    icon: BarChart3,
-    title: 'Climate Insights',
-    body: 'Monthly normals and annual series built from the ERA5 reanalysis archive, with the trend computed from the data, not guessed.',
-  },
-  {
     icon: Languages,
     title: 'Multilingual Support',
     body: 'English, Hindi, Kannada, Tamil and Telugu. Temperatures, percentages and wind speeds stay as digits in every language.',
@@ -58,17 +53,17 @@ const STEPS = [
 
 export default function Landing() {
   const { t } = useLanguage();
+  const suggestedQuestions = getSuggestedQuestions(t);
 
   return (
     <div>
       <section className="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-[#12405A] via-[#0B2536] to-night-900">
         <div className="mx-auto max-w-5xl px-4 py-20 text-center sm:py-28">
-          <span className="chip mx-auto">Smart India Hackathon 2026 · SIH26068 · Disaster Management</span>
           <h1 className="mt-6 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
             WeatherGPT — Understand Weather. Make Better Decisions.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-mist-200">
-            Conversational AI for weather forecasting, alerts, climate information and actionable insights.
+            Conversational AI for weather forecasting, alerts and actionable insights.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -84,7 +79,7 @@ export default function Landing() {
           <div className="mt-10">
             <p className="text-sm text-mist-400">{t('chat.suggestions')}</p>
             <div className="mt-3 flex flex-wrap justify-center gap-2">
-              {SUGGESTED_QUESTIONS.slice(0, 4).map((q) => (
+              {suggestedQuestions.slice(0, 4).map((q) => (
                 <Link key={q} to="/weather-gpt" state={{ question: q }} className="chip hover:border-signal-500/60">
                   {q}
                 </Link>
@@ -97,7 +92,7 @@ export default function Landing() {
       <section className="mx-auto max-w-7xl px-4 py-16">
         <h2 className="font-display text-3xl font-extrabold text-white">Everything in one place</h2>
         <p className="mt-2 max-w-2xl text-mist-300">
-          Eight capabilities, built around one rule: real data for anything measurable, explanation only on top of it.
+          Seven capabilities, built around one rule: real data for anything measurable, explanation only on top of it.
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

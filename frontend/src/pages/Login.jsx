@@ -21,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     if (!form.email.trim() || !form.password) {
-      setError('Enter your email and password.');
+      setError(t('auth.enterCredentials'));
       return;
     }
     setBusy(true);
@@ -38,7 +38,7 @@ export default function Login() {
   return (
     <div className="mx-auto max-w-md px-4 py-16">
       <h1 className="font-display text-3xl font-extrabold text-white">{t('auth.signIn')}</h1>
-      <p className="mt-2 text-mist-300">Welcome back. Your saved places and conversations are waiting.</p>
+      <p className="mt-2 text-mist-300">{t('auth.welcome')}</p>
 
       <form onSubmit={submit} className="panel mt-6 space-y-4 p-6" noValidate>
         <div>
@@ -61,7 +61,7 @@ export default function Login() {
               type="button"
               onClick={() => setShow((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-mist-400 hover:text-white"
-              aria-label={show ? 'Hide password' : 'Show password'}
+              aria-label={show ? t('auth.hidePassword') : t('auth.showPassword')}
             >
               {show ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
             </button>
@@ -72,7 +72,7 @@ export default function Login() {
 
         <button type="submit" className="btn-primary w-full" disabled={busy}>
           {busy ? <Spinner /> : <LogIn className="h-4 w-4" aria-hidden="true" />}
-          {busy ? 'Signing in…' : t('auth.signIn')}
+          {busy ? t('auth.signingIn') : t('auth.signIn')}
         </button>
 
         <div className="flex items-center justify-between text-sm">

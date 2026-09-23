@@ -10,7 +10,6 @@ const PUBLIC_LINKS = [
   { to: '/weather', key: 'nav.weather' },
   { to: '/weather-gpt', key: 'nav.chat' },
   { to: '/alerts', key: 'nav.alerts' },
-  { to: '/climate', key: 'nav.climate' },
   { to: '/map', key: 'nav.map' },
   { to: '/about', key: 'nav.about' },
 ];
@@ -94,7 +93,7 @@ export default function Navbar() {
           onClick={() => setOpen((v) => !v)}
           className="btn-ghost ml-auto lg:hidden"
           aria-expanded={open}
-          aria-label="Menu"
+          aria-label={t('common.menu')}
         >
           {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </button>

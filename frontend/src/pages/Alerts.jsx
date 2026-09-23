@@ -60,8 +60,8 @@ export default function Alerts() {
               ) : (
                 <EmptyState
                   icon={ShieldAlert}
-                  title="No official warning is in force here"
-                  description="Nothing has been published for this point through the feeds this build can read."
+                  title={t('alerts.noOfficial')}
+                  description={t('alerts.noOfficialDescription')}
                 />
               )}
             </div>
@@ -77,13 +77,13 @@ export default function Alerts() {
               {generated.length ? (
                 generated.map((alert) => <AlertCard key={alert.id} alert={alert} />)
               ) : (
-                <EmptyState title={t('empty.alerts')} description="Nothing in the next seven days crosses a risk threshold here." />
+                <EmptyState title={t('empty.alerts')} description={t('alerts.noGenerated')} />
               )}
             </div>
           </section>
 
           {data?.checkedAt ? (
-            <p className="text-xs text-mist-400">Checked {formatTime(data.checkedAt, { withDate: true })}</p>
+            <p className="text-xs text-mist-400">{t('alerts.checked')} {formatTime(data.checkedAt, { withDate: true })}</p>
           ) : null}
         </div>
       )}

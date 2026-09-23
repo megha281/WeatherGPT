@@ -98,7 +98,7 @@ export default function Dashboard() {
               <DailyForecast daily={data.daily} />
             </>
           ) : (
-            <EmptyState title={t('empty.weather')} description="Search for a place to start." />
+            <EmptyState title={t('empty.weather')} description={t('dashboard.searchStart')} />
           )}
         </div>
 
@@ -108,7 +108,7 @@ export default function Dashboard() {
           <section className="panel p-5">
             <div className="flex items-center justify-between">
               <h2 className="section-title">{t('nav.alerts')}</h2>
-              <Link to="/alerts" className="text-sm text-signal-400 hover:underline">See all</Link>
+              <Link to="/alerts" className="text-sm text-signal-400 hover:underline">{t('common.seeAll')}</Link>
             </div>
             <div className="mt-3 space-y-3">
               {alerts === null ? (
@@ -124,7 +124,7 @@ export default function Dashboard() {
           <section className="panel p-5">
             <div className="flex items-center justify-between">
               <h2 className="section-title">{t('dashboard.savedLocations')}</h2>
-              <Link to="/saved-locations" className="text-sm text-signal-400 hover:underline">Manage</Link>
+              <Link to="/saved-locations" className="text-sm text-signal-400 hover:underline">{t('common.manage')}</Link>
             </div>
             {saved.length ? (
               <ul className="mt-3 space-y-2">
@@ -150,7 +150,7 @@ export default function Dashboard() {
           <section className="panel p-5">
             <div className="flex items-center justify-between">
               <h2 className="section-title">{t('dashboard.recentQuestions')}</h2>
-              <Link to="/chat-history" className="text-sm text-signal-400 hover:underline">All</Link>
+              <Link to="/chat-history" className="text-sm text-signal-400 hover:underline">{t('common.all')}</Link>
             </div>
             {recent.length ? (
               <ul className="mt-3 space-y-2">

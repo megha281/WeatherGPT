@@ -3,13 +3,14 @@ import RiskBadge from './RiskBadge';
 import { useLanguage } from '../context/LanguageContext';
 import { formatTime } from '../utils/format';
 import { riskStyle } from '../utils/weatherVisuals';
+import { translateAlertType } from '../i18n/localeData';
 
 /**
  * One card type, two clearly different labels: an official warning from a
  * weather authority, or our own deterministic assessment.
  */
 export default function AlertCard({ alert }) {
-  const { t } = useLanguage();
+  const { t, locale, language } = useLanguage();
   const official = alert.sourceType === 'official';
   const style = riskStyle(alert.severity);
 
@@ -21,7 +22,7 @@ export default function AlertCard({ alert }) {
             {official ? <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" /> : <Bot className="h-3.5 w-3.5" aria-hidden="true" />}
             {official ? t('alerts.official') : t('alerts.generated')}
           </p>
-          <h3 className="mt-1 font-display text-lg font-bold text-white">{alert.type}</h3>
+          <h3 className="mt-1 font-display text-lg font-bold text-white">{translateAlertType(language, alert.type)}</h3>
           {alert.area ? <p className="text-sm text-mist-300">{alert.area}</p> : null}
         </div>
         <RiskBadge level={alert.severity} />
@@ -41,8 +42,8 @@ export default function AlertCard({ alert }) {
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mist-400">
         <span className="inline-flex items-center gap-1.5">
           <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-          {formatTime(alert.validFrom, { withDate: true })}
-          {alert.validUntil ? ` → ${formatTime(alert.validUntil, { withDate: true })}` : ''}
+          {formatTime(alert.validFrom, { withDate: true, locale: locale.locale })}
+          {alert.validUntil ? ` → ${formatTime(alert.validUntil, { withDate: true, locale: locale.locale })}` : ''}
         </span>
         <span>
           {t('common.source')}:{' '}

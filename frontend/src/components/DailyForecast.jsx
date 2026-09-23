@@ -1,9 +1,10 @@
 import { useLanguage } from '../context/LanguageContext';
 import { formatDay, formatNumber, formatPercent, formatTemp } from '../utils/format';
 import { weatherIcon } from '../utils/weatherVisuals';
+import { translateWeatherCondition } from '../i18n/localeData';
 
 export default function DailyForecast({ daily, onSelectDay }) {
-  const { t } = useLanguage();
+  const { t, locale, language } = useLanguage();
   const days = daily?.days || [];
   if (!days.length) return null;
 
@@ -27,7 +28,7 @@ export default function DailyForecast({ daily, onSelectDay }) {
                 onClick={() => onSelectDay && onSelectDay(day)}
                 className="grid w-full grid-cols-[86px_28px_1fr_auto] items-center gap-3 py-3 text-left hover:bg-white/5"
               >
-                <span className="text-sm text-mist-200">{formatDay(day.date)}</span>
+                <span className="text-sm text-mist-200">{formatDay(day.date, { locale: locale.locale, todayLabel: t('common.today'), tomorrowLabel: t('common.tomorrow') })}</span>
                 <Icon className="h-5 w-5 text-signal-400" aria-hidden="true" />
                 <span className="flex items-center gap-3">
                   <span className="hidden text-xs text-mist-400 sm:inline">{formatTemp(day.minTemp, '')}</span>
@@ -45,7 +46,7 @@ export default function DailyForecast({ daily, onSelectDay }) {
                 </span>
               </button>
               <p className="pb-3 text-xs text-mist-400 sm:hidden">
-                {day.condition} · {formatTemp(day.minTemp, unit)} – {formatTemp(day.maxTemp, unit)}
+                {translateWeatherCondition(language, day.condition)} · {formatTemp(day.minTemp, unit)} – {formatTemp(day.maxTemp, unit)}
               </p>
             </li>
           );

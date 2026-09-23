@@ -1,6 +1,7 @@
 import {
   Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSnow, CloudSun, Sun, Wind,
 } from 'lucide-react';
+import { weatherTerm } from '../i18n/localeData';
 
 const ICONS = {
   sun: Sun,
@@ -31,14 +32,14 @@ export function riskStyle(level) {
   return RISK_STYLES[String(level || 'LOW').toUpperCase()] || RISK_STYLES.LOW;
 }
 
-export function uvLabel(uv) {
+export function uvLabel(uv, language = 'en') {
   const v = Number(uv);
   if (!Number.isFinite(v)) return '—';
-  if (v < 3) return 'Low';
-  if (v < 6) return 'Moderate';
-  if (v < 8) return 'High';
-  if (v < 11) return 'Very high';
-  return 'Extreme';
+  if (v < 3) return weatherTerm(language, 'uvLow');
+  if (v < 6) return weatherTerm(language, 'uvModerate');
+  if (v < 8) return weatherTerm(language, 'uvHigh');
+  if (v < 11) return weatherTerm(language, 'uvVeryHigh');
+  return weatherTerm(language, 'uvExtreme');
 }
 
 /** Sky tint for the hero, based on the current condition and day/night. */
