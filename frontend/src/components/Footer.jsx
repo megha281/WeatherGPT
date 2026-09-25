@@ -36,18 +36,27 @@ export default function Footer() {
               </a>
             </li>
             <li>
+              <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noreferrer" className="hover:text-signal-400">
+                {t('footer.climateData')}
+              </a>
+            </li>
+            <li>
               <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer" className="hover:text-signal-400">
                 {t('footer.maps')}: OpenStreetMap contributors
               </a>
             </li>
             <li>{t('footer.knowledge')}: WeatherGPT Knowledge Base</li>
-            <li>{t('footer.ai')}: Google Gemini</li>
+            <li>{t('footer.ai')}: {t('footer.aiDetail')}</li>
           </ul>
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-white">{t('nav.about')} WeatherGPT</p>
-          <p className="mt-3 text-sm leading-relaxed text-mist-400">{t('footer.aboutText')}</p>
+          <p className="text-sm font-semibold text-white">{t('footer.safety')}</p>
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed text-mist-400">
+            <li>{t('footer.safetyAutomated')}</li>
+            <li>{t('footer.safetyAuthorities')}</li>
+            <li>{t('footer.safetyIndia')}</li>
+          </ul>
           <Link to="/about" className="mt-3 inline-block text-sm text-signal-400 hover:text-signal-300">
             {t('common.aboutProject')}
           </Link>

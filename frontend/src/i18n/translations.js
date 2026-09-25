@@ -7,6 +7,8 @@
  */
 
 import { LANGUAGE_META } from './localeData';
+import { LANDING_TRANSLATIONS } from './landingTranslations';
+import { ABOUT_TRANSLATIONS } from './aboutTranslations';
 
 export const LANGUAGES = LANGUAGE_META;
 
@@ -580,13 +582,13 @@ const ur = makeLocale({ 'nav.home': 'ہوم', 'nav.weather': 'موسم', 'nav.ch
 const kok = makeLocale({ 'nav.home': 'मुखेल पान', 'nav.weather': 'हवामान', 'nav.chat': 'WeatherGPT', 'nav.alerts': 'इशारे', 'nav.map': 'नकाशो', 'nav.about': 'म्हायती', 'nav.signin': 'साइन इन', 'nav.signup': 'खातें तयार करात', 'nav.dashboard': 'डॅशबोर्ड', 'nav.profile': 'प्रोफायल', 'nav.settings': 'सेटिंग्ज', 'nav.logout': 'लॉग आऊट', 'common.search': 'सोदात', 'common.searchPlaceholder': 'शार, गांव वा जिल्हो सोदात', 'common.useMyLocation': 'म्हाजें स्थान वापरात', 'common.save': 'जतन करात', 'common.delete': 'काडात', 'common.cancel': 'रद्द करात', 'common.retry': 'परत येत्न करात', 'common.today': 'आयज', 'common.tomorrow': 'फाल्यां', 'common.now': 'आतां', 'common.sources': 'स्रोत', 'loading.weather': 'हवामान लोड जाता…', 'loading.thinking': 'WeatherGPT विचार करता…', 'loading.alerts': 'इशारे लोड जातात…', 'empty.alerts': 'सक्रीय इशारे नात.', 'empty.weather': 'हवामान माहिती मेळना.', 'weather.current': 'सद्याचें हवामान', 'weather.humidity': 'आर्द्रता', 'weather.wind': 'वारो', 'weather.rainChance': 'पावसाची शक्यता', 'weather.hourly': 'फुडलें 24 वरां', 'weather.daily': '7 दिसांचो अंदाज', 'weather.charts': 'अंदाजाचे चार्ट', 'risk.title': 'WeatherGPT जोखीम मुल्यांकन', 'risk.level': 'जोखीमेची पातळी', 'risk.advisory': 'कितें करपाचें', 'risk.LOW': 'उणे', 'risk.MODERATE': 'मध्यम', 'risk.HIGH': 'चड', 'risk.SEVERE': 'गंभीर', 'alerts.official': 'अधिकृत हवामान इशारो', 'alerts.generated': 'WeatherGPT जोखीम मुल्यांकन', 'chat.title': 'WeatherGPT कडेन विचारात', 'chat.send': 'धाडात', 'chat.clear': 'चॅट साफ करात', 'chat.suggestions': 'अशें विचारून पळयात', 'chat.listening': 'आयकता…', 'auth.signIn': 'साइन इन', 'auth.signUp': 'खातें तयार करात', 'auth.fullName': 'सगळें नांव', 'auth.email': 'ईमेल', 'auth.password': 'पासवर्ड', 'auth.confirmPassword': 'पासवर्डाची खात्री करात', 'auth.language': 'आवडती भास', 'auth.forgot': 'पासवर्ड विसरलात?' });
 
 export const translations = {
-  en,
-  hi: { ...en, ...hi },
-  kn: { ...en, ...kn },
-  ta: { ...en, ...ta },
-  te: { ...en, ...te },
-  ml,
-  mr,
+  en: { ...en, ...LANDING_TRANSLATIONS.en, ...ABOUT_TRANSLATIONS.en },
+  hi: { ...en, ...hi, ...LANDING_TRANSLATIONS.hi, ...ABOUT_TRANSLATIONS.hi },
+  kn: { ...en, ...kn, ...LANDING_TRANSLATIONS.kn, ...ABOUT_TRANSLATIONS.kn },
+  ta: { ...en, ...ta, ...LANDING_TRANSLATIONS.ta, ...ABOUT_TRANSLATIONS.ta },
+  te: { ...en, ...te, ...LANDING_TRANSLATIONS.te, ...ABOUT_TRANSLATIONS.te },
+  ml: { ...ml, ...LANDING_TRANSLATIONS.ml, ...ABOUT_TRANSLATIONS.ml },
+  mr: { ...mr, ...LANDING_TRANSLATIONS.mr, ...ABOUT_TRANSLATIONS.mr },
   bn,
   gu,
   pa,

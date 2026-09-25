@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -13,8 +13,9 @@ body,
 }
 
 body {
-  @apply bg-night-900 text-mist-100 font-sans antialiased;
+  @apply bg-slate-50 text-slate-900 font-sans antialiased;
   margin: 0;
+  background-image: radial-gradient(circle at top, rgba(14, 165, 233, 0.10), transparent 32%), linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 html[dir='rtl'] {
@@ -28,6 +29,34 @@ html[dir='rtl'] .recharts-wrapper {
 
 html[dir='rtl'] .field {
   text-align: right;
+}
+
+[class*='bg-night-'] {
+  background-color: #ffffff !important;
+}
+
+[class*='border-white'] {
+  border-color: rgba(148, 163, 184, 0.35) !important;
+}
+
+[class*='text-white'] {
+  color: #0f172a !important;
+}
+
+[class*='text-mist-100'],
+[class*='text-mist-200'],
+[class*='text-mist-300'],
+[class*='text-mist-400'],
+[class*='text-slate-100'],
+[class*='text-slate-200'],
+[class*='text-slate-300'],
+[class*='text-slate-400'] {
+  color: #334155 !important;
+}
+
+[class*='text-signal-400'],
+[class*='text-signal-500'] {
+  color: #0369a1 !important;
 }
 
 /* Focus styles stay visible for keyboard users everywhere. */
@@ -49,55 +78,57 @@ html[dir='rtl'] .field {
 
 @layer components {
   .panel {
-    @apply rounded-2xl border border-white/10 bg-night-800/80 shadow-panel;
+    @apply rounded-2xl border border-slate-200 bg-white/90 shadow-[0_12px_40px_rgba(15,23,42,0.08)];
   }
   .panel-tight {
-    @apply rounded-xl border border-white/10 bg-night-800/60;
+    @apply rounded-xl border border-slate-200 bg-slate-50/90;
   }
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition
       disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-signal-500 text-night-900 hover:bg-signal-400;
+    @apply btn bg-signal-500 text-white hover:bg-signal-600;
   }
   .btn-ghost {
-    @apply btn border border-white/15 text-mist-100 hover:border-signal-500/60 hover:text-white;
+    @apply btn border border-slate-200 bg-white text-slate-700 hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700;
   }
   .btn-quiet {
-    @apply btn text-mist-300 hover:text-white;
+    @apply btn text-slate-600 hover:text-slate-900;
   }
   .field {
-    @apply w-full rounded-xl border border-white/10 bg-night-900/70 px-4 py-3 text-mist-100 placeholder:text-mist-400
-      focus:border-signal-500 focus:outline-none;
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400
+      focus:border-sky-400 focus:outline-none;
   }
   .label {
-    @apply mb-1.5 block text-sm font-medium text-mist-200;
+    @apply mb-1.5 block text-sm font-medium text-slate-700;
   }
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-night-700/70 px-3 py-1 text-xs text-mist-200;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs text-slate-700;
   }
   .metric-value {
-    @apply font-display text-2xl font-bold text-white;
+    @apply font-display text-2xl font-bold text-slate-900;
   }
   .section-title {
-    @apply font-display text-lg font-bold text-white;
+    @apply font-display text-lg font-bold text-slate-900;
   }
 }
 
-/* Leaflet sits on a dark page, so tone the tiles and popups to match. */
+/* Leaflet sits on a light page, so tone the tiles and popups to match. */
 .leaflet-container {
-  background: #0a1d2b;
+  background: #edf6ff;
   font-family: inherit;
 }
 .leaflet-tile {
-  filter: brightness(0.82) saturate(0.85) contrast(1.05);
+  filter: brightness(1.04) saturate(0.9) contrast(1.05);
 }
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  background: #0f2836;
-  color: #eaf4f8;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
 }
 .leaflet-popup-content {
   margin: 12px 14px;
@@ -105,7 +136,8 @@ html[dir='rtl'] .field {
 
 /* Recharts tooltips */
 .recharts-default-tooltip {
-  background: #0f2836 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(148, 163, 184, 0.35) !important;
   border-radius: 12px !important;
+  color: #0f172a !important;
 }

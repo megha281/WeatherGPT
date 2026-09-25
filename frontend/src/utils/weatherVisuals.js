@@ -44,17 +44,17 @@ export function uvLabel(uv, language = 'en') {
 
 /** Sky tint for the hero, based on the current condition and day/night. */
 export function skyGradient(icon, isDay = true) {
-  if (!isDay) return 'from-[#0B1E2E] via-[#10293B] to-[#061320]';
+  if (!isDay) return 'from-slate-100 via-slate-50 to-white';
   switch (icon) {
     case 'sun':
-      return 'from-[#1D5C77] via-[#12405A] to-[#061320]';
+      return 'from-sky-100 via-white to-amber-50';
     case 'rain':
     case 'showers':
     case 'drizzle':
-      return 'from-[#1A4655] via-[#123544] to-[#061320]';
+      return 'from-slate-100 via-sky-50 to-white';
     case 'storm':
-      return 'from-[#2A3E5C] via-[#172B42] to-[#061320]';
+      return 'from-slate-200 via-sky-100 to-white';
     default:
-      return 'from-[#17475C] via-[#0F3245] to-[#061320]';
+      return 'from-sky-100 via-white to-slate-50';
   }
 }

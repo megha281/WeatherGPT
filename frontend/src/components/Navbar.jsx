@@ -24,7 +24,7 @@ const ACCOUNT_LINKS = [
 
 function linkClass({ isActive }) {
   return `rounded-lg px-3 py-2 text-sm transition ${
-    isActive ? 'bg-night-700 text-white' : 'text-mist-300 hover:text-white'
+    isActive ? 'bg-sky-50 text-sky-700 ring-1 ring-sky-100' : 'text-slate-600 hover:text-slate-900'
   }`;
 }
 
@@ -44,13 +44,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-night-900/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3">
         <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-signal-500 text-night-900">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-sky-500 text-white shadow-sm">
             <CloudLightning className="h-5 w-5" aria-hidden="true" />
           </span>
-          <span className="font-display text-lg font-extrabold tracking-tight text-white">WeatherGPT</span>
+          <span className="font-display text-lg font-extrabold tracking-tight text-slate-900">WeatherGPT</span>
         </Link>
 
         <div className="ml-4 hidden items-center gap-1 lg:flex">
@@ -100,7 +100,7 @@ export default function Navbar() {
       </nav>
 
       {open ? (
-        <div className="border-t border-white/10 bg-night-900 px-4 py-3 lg:hidden">
+        <div className="border-t border-slate-200 bg-white px-4 py-3 lg:hidden">
           <div className="grid gap-1">
             {PUBLIC_LINKS.map((link) => (
               <NavLink key={link.to} to={link.to} end={link.end} className={linkClass}>
@@ -109,10 +109,10 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="mt-3 border-t border-white/10 pt-3">
+          <div className="mt-3 border-t border-slate-200 pt-3">
             {isAuthenticated ? (
               <div className="grid gap-1">
-                <p className="px-3 py-1 text-xs text-mist-400">{user?.name}</p>
+                <p className="px-3 py-1 text-xs text-slate-500">{user?.name}</p>
                 {ACCOUNT_LINKS.map((link) => (
                   <NavLink key={link.to} to={link.to} className={linkClass}>
                     {t(link.key)}
@@ -135,7 +135,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="mt-3 border-t border-white/10 pt-3">
+          <div className="mt-3 border-t border-slate-200 pt-3">
             <LanguageSelector className="w-full" />
           </div>
         </div>

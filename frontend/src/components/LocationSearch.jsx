@@ -48,12 +48,23 @@ export default function LocationSearch({ onSelect, autoFocus = false, showMyLoca
     return () => document.removeEventListener('mousedown', onClickAway);
   }, []);
 
-  const choose = (place) => {
+  const choose = (place, shouldKeepQuery = true) => {
     setLocation(place);
-    setQuery('');
+    if (shouldKeepQuery) {
+      setQuery(place.name || place.city || place.label || query);
+    } else {
+      setQuery('');
+    }
     setResults([]);
     setOpen(false);
     if (onSelect) onSelect(place);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && results.length) {
+      event.preventDefault();
+      choose(results[0], true);
+    }
   };
 
   return (
@@ -67,8 +78,14 @@ export default function LocationSearch({ onSelect, autoFocus = false, showMyLoca
             autoFocus={autoFocus}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => results.length && setOpen(true)}
+            onKeyDown={handleKeyDown}
             placeholder={t('common.searchPlaceholder')}
-            className="field pl-10"
+            className="field pl-10 text-sm text-slate-900 placeholder:text-slate-400"
+            style={{
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 8px 24px rgba(15,23,42,0.08)',
+            }}
             aria-label={t('common.searchPlaceholder')}
           />
           {loading ? (
@@ -89,9 +106,9 @@ export default function LocationSearch({ onSelect, autoFocus = false, showMyLoca
       {error ? <p className="mt-2 text-sm text-risk-severe">{error}</p> : null}
 
       {open ? (
-        <ul className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-white/10 bg-night-800 shadow-panel">
+        <ul className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.14)]">
           {results.length === 0 && !loading ? (
-            <li className="px-4 py-3 text-sm text-mist-300">
+            <li className="px-4 py-3 text-sm text-slate-600">
               {t('locations.noMatch', { query: debounced })}
             </li>
           ) : null}
@@ -99,17 +116,19 @@ export default function LocationSearch({ onSelect, autoFocus = false, showMyLoca
             <li key={`${place.id || place.name}-${place.latitude}`}>
               <button
                 type="button"
-                onClick={() => choose(place)}
-                className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-night-700"
+                onClick={() => choose(place, true)}
+                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-150 hover:bg-sky-500/10 focus:bg-sky-500/10"
               >
-                <MapPin className="h-4 w-4 shrink-0 text-signal-400" aria-hidden="true" />
-                <span className="min-w-0">
-                  <span className="block truncate text-sm text-mist-100">{place.name}</span>
-                  <span className="block truncate text-xs text-mist-400">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-500/15 text-sky-300">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-medium text-slate-900">{place.name}</span>
+                  <span className="block truncate text-xs text-slate-400">
                     {[place.state, place.district, place.country].filter(Boolean).join(' · ')}
                   </span>
                 </span>
-                <span className="ml-auto shrink-0 text-xs text-mist-400">
+                <span className="ml-auto shrink-0 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium tracking-wide text-slate-600">
                   {Number(place.latitude).toFixed(2)}, {Number(place.longitude).toFixed(2)}
                 </span>
               </button>

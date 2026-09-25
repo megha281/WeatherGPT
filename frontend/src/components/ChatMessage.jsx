@@ -1,6 +1,5 @@
 import { Bot, User } from 'lucide-react';
 import RiskBadge from './RiskBadge';
-import SourceList from './SourceList';
 import { formatPercent, formatTemp, formatTime } from '../utils/format';
 import { useLanguage } from '../context/LanguageContext';
 import { translateWeatherCondition } from '../i18n/localeData';
@@ -85,12 +84,6 @@ export default function ChatMessage({ message }) {
           </div>
         ) : null}
 
-        {data?.sources?.length ? (
-          <div>
-            <p className="mb-1.5 text-xs uppercase tracking-wide text-mist-400">{t('common.sources')}</p>
-            <SourceList sources={data.sources} />
-          </div>
-        ) : null}
       </div>
     </div>
   );

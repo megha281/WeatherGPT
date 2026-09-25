@@ -1,67 +1,67 @@
+import { useLanguage } from '../context/LanguageContext';
+
 const FEATURES = [
-  ['🌦️', 'Get Weather Forecasts', 'Check current weather conditions and upcoming forecasts for your location.'],
-  ['🤖', 'Ask Weather Questions', 'Interact with WeatherGPT using natural language. Ask questions such as "Will it rain tomorrow?", "What should I wear today?", or "Is it safe to travel?"'],
-  ['📍', 'Location-Based Weather Insights', 'Select a location and receive weather information and relevant risk insights for that area.'],
-  ['⚠️', 'Stay Aware with Weather Alerts', 'Receive important information about severe weather conditions and potential hazards.'],
-  ['🗺️', 'Explore Weather on Maps', 'Use interactive maps to explore locations and understand weather conditions geographically.'],
-  ['🌍', 'Discover Climate Information', 'Learn about climate patterns, rainfall, seasons, and other meteorological information in an easy-to-understand way.'],
+  ['🌦️', 'about.forecasts', 'about.forecastsBody'],
+  ['🤖', 'about.questions', 'about.questionsBody'],
+  ['📍', 'about.locations', 'about.locationsBody'],
+  ['⚠️', 'about.alerts', 'about.alertsBody'],
+  ['🗺️', 'about.maps', 'about.mapsBody'],
+  ['🌍', 'about.climate', 'about.climateBody'],
 ];
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <header className="max-w-3xl">
-        <span className="chip">ABOUT WEATHERGPT</span>
+        <span className="chip">{t('about.badge')}</span>
         <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-          Your intelligent companion for understanding the weather
+          {t('about.title')}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-mist-200">
-          WeatherGPT is a modern, AI-powered weather platform that makes weather information easier to understand and use.
+          {t('about.intro')}
         </p>
         <p className="mt-4 leading-relaxed text-mist-300">
-          Instead of navigating through complicated weather data, WeatherGPT brings forecasts, weather alerts,
-          location-based insights, climate information, and conversational AI together in one simple platform.
+          {t('about.detail')}
         </p>
       </header>
 
       <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">What You Can Do with WeatherGPT</h2>
+        <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">{t('about.what')}</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {FEATURES.map(([icon, title, body]) => (
             <article key={title} className="panel p-5">
               <span className="text-3xl" role="img" aria-label="">{icon}</span>
-              <h3 className="mt-4 font-display text-lg font-bold text-white">{title}</h3>
-              <p className="mt-2 leading-relaxed text-mist-300">{body}</p>
+              <h3 className="mt-4 font-display text-lg font-bold text-white">{t(title)}</h3>
+              <p className="mt-2 leading-relaxed text-mist-300">{t(body)}</p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="panel mt-12 p-6 sm:p-8">
-        <h2 className="section-title">Designed Around You</h2>
+        <h2 className="section-title">{t('about.designed')}</h2>
         <p className="mt-4 leading-relaxed text-mist-200">
-          WeatherGPT combines weather data and artificial intelligence to turn complex meteorological information into
-          clear and useful insights.
+          {t('about.designedBody')}
         </p>
         <p className="mt-4 leading-relaxed text-mist-300">
-          Whether you're planning your day, preparing for travel, monitoring changing weather conditions, or simply
-          curious about the climate around you, WeatherGPT helps you understand the information that matters.
+          {t('about.designedBody2')}
         </p>
       </section>
 
       <section className="mt-12 max-w-3xl">
-        <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">Our Vision</h2>
+        <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">{t('about.vision')}</h2>
         <p className="mt-4 text-xl font-semibold leading-relaxed text-signal-400">
-          Make weather information simple, accessible, and actionable for everyone.
+          {t('about.visionQuote')}
         </p>
         <p className="mt-4 leading-relaxed text-mist-300">
-          WeatherGPT is designed to bring reliable weather information into a conversational experience so that users
-          can spend less time interpreting weather data and more time making informed decisions.
+          {t('about.visionBody')}
         </p>
       </section>
 
       <footer className="mt-12 border-t border-white/10 pt-6 text-sm text-mist-400">
-        WeatherGPT — Understand the weather. Plan with confidence.
+        {t('about.footer')}
       </footer>
     </div>
   );

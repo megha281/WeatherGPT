@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Instrument-panel palette: night-sky navies with one signal colour.
-        night: { 900: '#061320', 800: '#0A1D2B', 700: '#0F2836', 600: '#163545', 500: '#1E4456' },
-        signal: { 400: '#5AD7FB', 500: '#2FC2F0', 600: '#149BC6' },
-        mist: { 100: '#EAF4F8', 200: '#C7DCE6', 300: '#9BB8C7', 400: '#7092A5' },
-        risk: { low: '#49CFA1', moderate: '#F2B544', high: '#F07E3C', severe: '#E85A5A' },
+        // Light theme palette: white surfaces, slate text, and a bright blue accent.
+        night: { 900: '#F8FAFC', 800: '#F1F5F9', 700: '#E2E8F0', 600: '#CBD5E1', 500: '#94A3B8' },
+        signal: { 400: '#7DD3FC', 500: '#0EA5E9', 600: '#0284C7' },
+        mist: { 100: '#0F172A', 200: '#1E293B', 300: '#334155', 400: '#475569' },
+        risk: { low: '#22C55E', moderate: '#F59E0B', high: '#F97316', severe: '#EF4444' },
       },
       fontFamily: {
         display: ['"Bricolage Grotesque"', 'Segoe UI', 'system-ui', 'sans-serif'],

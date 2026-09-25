@@ -8,7 +8,6 @@ import DailyForecast from '../components/DailyForecast';
 import WeatherCharts from '../components/WeatherCharts';
 import RiskPanel from '../components/RiskPanel';
 import ModelComparison from '../components/ModelComparison';
-import SourceList from '../components/SourceList';
 import ErrorState from '../components/ErrorState';
 import { LoadingBlock, SkeletonCard } from '../components/Loading';
 import { useLocation } from '../context/LocationContext';
@@ -81,12 +80,6 @@ export default function Weather() {
           <WeatherCharts hourly={data.hourly} />
           <DailyForecast daily={data.daily} />
           <ModelComparison data={models?.data} note={models?.note} />
-          <SourceList
-            sources={[
-              { kind: t('weather.sourceData'), name: 'Open-Meteo', url: 'https://open-meteo.com' },
-              { kind: t('weather.riskAnalysis'), name: t('weather.riskEngine') },
-            ]}
-          />
         </div>
       ) : null}
     </div>

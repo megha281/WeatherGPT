@@ -6,13 +6,6 @@ export const LANGUAGE_META = [
   { code: 'ta', label: 'Tamil', native: 'தமிழ்', dir: 'ltr', locale: 'ta-IN', speech: 'ta-IN' },
   { code: 'ml', label: 'Malayalam', native: 'മലയാളം', dir: 'ltr', locale: 'ml-IN', speech: 'ml-IN' },
   { code: 'mr', label: 'Marathi', native: 'मराठी', dir: 'ltr', locale: 'mr-IN', speech: 'mr-IN' },
-  { code: 'bn', label: 'Bengali', native: 'বাংলা', dir: 'ltr', locale: 'bn-IN', speech: 'bn-IN' },
-  { code: 'gu', label: 'Gujarati', native: 'ગુજરાતી', dir: 'ltr', locale: 'gu-IN', speech: 'gu-IN' },
-  { code: 'pa', label: 'Punjabi', native: 'ਪੰਜਾਬੀ', dir: 'ltr', locale: 'pa-IN', speech: 'pa-IN' },
-  { code: 'or', label: 'Odia', native: 'ଓଡ଼ିଆ', dir: 'ltr', locale: 'or-IN', speech: 'or-IN' },
-  { code: 'as', label: 'Assamese', native: 'অসমীয়া', dir: 'ltr', locale: 'as-IN', speech: 'as-IN' },
-  { code: 'ur', label: 'Urdu', native: 'اردو', dir: 'rtl', locale: 'ur-IN', speech: 'ur-IN' },
-  { code: 'kok', label: 'Konkani', native: 'कोंकणी', dir: 'ltr', locale: 'kok-IN', speech: 'kok-IN' },
 ];
 
 export const WEATHER_TERMS = {

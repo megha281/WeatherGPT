@@ -10,9 +10,9 @@ export function AuthProvider({ children }) {
   const { setLanguage } = useLanguage();
 
   const applyUser = useCallback(
-    (nextUser) => {
+    (nextUser, applyPreferredLanguage = false) => {
       setUser(nextUser);
-      if (nextUser?.preferredLanguage) setLanguage(nextUser.preferredLanguage);
+      if (applyPreferredLanguage && nextUser?.preferredLanguage) setLanguage(nextUser.preferredLanguage);
     },
     [setLanguage]
   );
@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
     async (credentials) => {
       const data = await authService.login(credentials);
       authService.setToken(data.token);
-      applyUser(data.user);
+      applyUser(data.user, true);
       return data.user;
     },
     [applyUser]
@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
     async (payload) => {
       const data = await authService.register(payload);
       authService.setToken(data.token);
-      applyUser(data.user);
+      applyUser(data.user, true);
       return data;
     },
     [applyUser]
